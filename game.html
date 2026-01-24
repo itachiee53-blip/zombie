@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival: Run & Rin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-day">
+
+    <div id="start-overlay" class="overlay">
+        <div class="overlay-content">
+            <div class="start-icon">☣️</div>
+            <h1>SURVIVAL: RUN & RIN</h1>
+            <p>พี่รัน.. หนูไม่อยากตาย.. พาหนูออกไปที</p>
+            <div class="start-actions">
+                <button id="btn-continue" class="start-btn btn-load hidden">📂 CONTINUE SAVE</button>
+                <button id="btn-newgame" class="start-btn">▶ NEW GAME</button>
+            </div>
+            <button id="btn-reset-save" class="reset-link hidden">🗑️ Delete Save Data</button>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="nav-bar">
+            <button id="home-btn" class="nav-btn btn-home">🏠 MENU</button>
+            <div class="right-nav">
+                <button id="save-btn" class="nav-btn btn-save" onclick="saveGameData()">💾 SAVE</button>
+                <button id="guide-btn" class="nav-btn btn-guide" onclick="openGuide()">❓ GUIDE</button>
+            </div>
+        </div>
+
+        <div class="time-bar">
+            <span id="day-display">📅 Day 1</span>
+            <span id="time-display">🕗 08:00 | Morning</span>
+        </div>
+
+        <div class="hud-bar">
+            <div class="stat-group">
+                <div class="stat-label">❤️ HP <span id="val-hp">100</span>%</div>
+                <div class="progress-bg"><div id="bar-hp" class="progress-fill hp-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">🧠 Sanity <span id="val-sanity">100</span>%</div>
+                <div class="progress-bg"><div id="bar-sanity" class="progress-fill sanity-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">🍗 Food <span id="val-food">100</span>%</div>
+                <div class="progress-bg"><div id="bar-food" class="progress-fill food-fill" style="width: 100%;"></div></div>
+            </div>
+            <div class="stat-group">
+                <div class="stat-label">👧 Rin <span id="val-rel">50</span>%</div>
+                <div class="progress-bg"><div id="bar-rel" class="progress-fill rel-fill" style="width: 50%;"></div></div>
+            </div>
+        </div>
+
+        <div id="enemy-hud" class="enemy-bar-container hidden">
+            <div class="enemy-info">
+                <span id="enemy-name">🧟 Zombie</span>
+                <span id="enemy-hp-text">100/100</span>
+            </div>
+            <div class="progress-bg enemy-bg">
+                <div id="bar-enemy" class="progress-fill enemy-fill" style="width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="sub-hud">
+            <div class="inv-box">🎒 Bag: <span id="val-slots">0/3</span></div>
+            <div class="ammo-box">🔫 Ammo: <span id="val-ammo">0</span></div>
+            <div class="noise-box">🔊 Noise: <span id="val-noise">Low</span></div>
+        </div>
+
+        <div id="inventory-display" class="inventory-grid"></div>
+
+        <div class="scene-icon-container">
+            <div id="scene-icon">🏙️</div>
+            <div id="damage-popup" class="dmg-popup hidden">-10</div>
+        </div>
+
+        <audio id="scene-audio" loop></audio>
+        <audio id="sfx-audio"></audio>
+
+        <div class="story-display-area">
+            <div id="narrative-box" class="narrative-scroll">Loading...</div>
+            <div id="dialogue-container" class="dialogue-box hidden">
+                <div id="speaker-name" class="speaker-label">???</div>
+                <div id="speaker-text" class="speech-text">...</div>
+            </div>
+        </div>
+
+        <div id="status-msg" class="status-message"></div>
+        <div class="choices-container" id="choices-area"></div>
+    </div>
+
+    <div id="translation-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>📜 REVIEW & ACTION</h2>
+            <div class="review-box">
+                <small>Situation:</small>
+                <div class="eng-text" id="m-story-en"></div>
+                <div class="phonetic" id="m-story-read"></div>
+                <div class="th-text" id="m-story-th"></div>
+            </div>
+            <div class="review-box" style="border-left: 4px solid #fff;">
+                <small>Your Choice:</small>
+                <div class="eng-text" id="m-choice-en"></div>
+                <div class="phonetic" id="m-choice-read"></div>
+                <div class="th-text" id="m-choice-th"></div>
+                <div class="effect-preview" id="m-effect-preview"></div>
+            </div>
+            <button class="next-btn" id="modal-next-btn">CONFIRM</button>
+        </div>
+    </div>
+
+    <div id="item-modal" class="item-modal-overlay hidden">
+        <div class="item-modal">
+            <h3 id="item-name-display">Item Name</h3>
+            <p style="color:#aaa; font-size:0.9rem;">ต้องการทำอะไรกับไอเท็มนี้?</p>
+            <div class="item-actions">
+                <button class="btn-keep" onclick="closeItemModal()">เก็บไว้</button>
+                <button class="btn-discard" id="btn-discard-action">ทิ้ง</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="guide-modal" class="modal hidden">
+        <div class="modal-content guide-content">
+            <h2>📖 SURVIVAL GUIDE</h2>
+            <div class="guide-scroll">
+                <div class="guide-item">
+                    <strong>⚔️ Combat (การต่อสู้):</strong>
+                    <p>เมื่อเข้าสู่การต่อสู้ แถบเลือดศัตรูจะปรากฏขึ้น การโจมตีรุนแรงอาจทำให้น้องรินกลัว (ความสัมพันธ์ลดลง)</p>
+                </div>
+                <div class="guide-item">
+                    <strong>❤️ HP (พลังชีวิต):</strong>
+                    <p>ถ้าหมด = ตาย (Game Over)</p>
+                </div>
+                <div class="guide-item">
+                    <strong>👧 Rin (ความสัมพันธ์น้องสาว):</strong>
+                    <p>สำคัญมาก! ถ้าเหลือ 0 = น้องจะหนีไป หรือตายเพราะไม่เชื่อฟังคุณ</p>
+                </div>
+            </div>
+            <button class="next-btn" onclick="closeGuide()">CLOSE</button>
+        </div>
+    </div>
+
+    <script src="stories.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
