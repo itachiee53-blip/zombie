@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Menu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="menu-header">
+            <h1 class="game-title">SURVIVAL QUEST</h1>
+            <p class="game-subtitle">Choose your destiny & Survive the horror</p>
+        </div>
+        
+        <div class="story-grid" id="menu-list"></div>
+        <audio id="sfx-audio"></audio>
+    </div>
+
+    <script src="stories.js"></script>
+    <script>
+        const menuList = document.getElementById('menu-list');
+        const sfxEl = document.getElementById('sfx-audio');
+
+        function playAndGo(url) {
+            if(sfxEl) { sfxEl.src = "sounds/click.mp3"; sfxEl.play().catch(() => {}); }
+            setTimeout(() => { window.location.href = url; }, 150);
+        }
+
+        if (typeof allStories !== 'undefined') {
+            for (const [key, story] of Object.entries(allStories)) {
+                let startIcon = "💀";
+                if(story.scenes && story.scenes[story.startNode] && story.scenes[story.startNode].icon) {
+                    startIcon = story.scenes[story.startNode].icon;
+                }
+                
+                const card = document.createElement('div');
+                card.className = 'story-card';
+                card.onclick = () => playAndGo(`game.html?story=${key}`);
+                card.innerHTML = `
+                    <div class="card-icon">${startIcon}</div>
+                    <div class="card-title">${story.title}</div>
+                    <div class="card-desc">${story.desc}</div>
+                    <div class="play-tag">▶ START GAME</div>
+                `;
+                menuList.appendChild(card);
+            }
+        }
+    </script>
+</body>
+</html>
