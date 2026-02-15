@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Super Vocab Pro Max: Ultra Smooth 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- ⚡ PERFORMANCE & GLOBAL SETTINGS --- */
+        :root { 
+            --primary: #6c5ce7; 
+            --primary-dark: #4834d4;
+            --accent: #fdcb6e; 
+            --success: #00b894; 
+            --danger: #ff7675; 
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+            --bg-gradient: linear-gradient(135deg, #a29bfe 0%, #74b9ff 100%);
+            --radius: 24px;
+        }
+        
+        * {
+            /* ช่วยให้ตัวหนังสือคมชัดและลดการกระตุก */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            box-sizing: border-box;
+            /* ป้องกันการแตะซ้ำในมือถือ */
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body { 
+            font-family: 'Sarabun', sans-serif; 
+            background: var(--bg-gradient); 
+            min-height: 100vh; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            color: var(--text-main);
+            padding: 15px; 
+            overflow-x: hidden;
+        }
+
+        .container { 
+            width: 96%; 
+            max-width: 1200px; 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 25px; 
+            border-radius: var(--radius); 
+            /* 🔥 GPU HACK: ลดภาระการวาดเงา */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15); 
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: auto;
+            min-height: 85vh;
+            /* 🔥 Force GPU Layer */
+            transform: translateZ(0);
+            will-change: transform, opacity;
+        }
+
+        /* --- Header --- */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .app-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+        .header-actions button {
+            background: #fff0f0; border: none; width: 40px; height: 40px; border-radius: 12px;
+            color: var(--danger); font-size: 1.1rem; cursor: pointer; transition: transform 0.1s;
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-actions button:active { transform: scale(0.95); }
+
+        /* --- 🔥 PROFILE CARD (Optimized Animation) --- */
+        .profile-card { 
+            /* ใช้สีพื้นหลังแบบคงที่แทน Gradient ที่ซับซ้อนเกินไป เพื่อลดการคำนวณเฟรม */
+            background: linear-gradient(120deg, #6c5ce7, #74b9ff);
+            background-size: 200% 200%;
+            animation: gradientBG 8s ease infinite; /* ช้าลงหน่อยเพื่อให้ CPU ทำงานน้อยลง */
+            color: white; 
+            padding: 25px; 
+            border-radius: 24px; 
+            box-shadow: 0 15px 35px rgba(108, 92, 231, 0.3);
+            margin-bottom: 25px; 
+            position: relative; overflow: hidden;
+            /* 🔥 GPU Layer */
+            transform: translate3d(0,0,0);
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .profile-top {
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+        }
+        .profile-info { flex-grow: 1; z-index: 2; position: relative; }
+        .rank-label { 
+            font-size: 0.85rem; opacity: 0.9; font-weight: 600; 
+            letter-spacing: 1px; text-transform: uppercase; 
+            margin-bottom: 5px; display: block;
+        }
+        .rank-name { 
+            font-size: 2rem; font-weight: 800; margin: 0; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+        }
+        
+        .profile-avatar {
+            font-size: 3.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 2; position: relative;
+            /* อนิเมชั่นลอยเบาๆ */
+            animation: floatAvatar 4s ease-in-out infinite;
+        }
+        @keyframes floatAvatar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .xp-wrapper { margin-bottom: 20px; position: relative; z-index: 2; }
+        .xp-header { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; font-weight: 600; opacity: 0.9; }
+        .xp-track { background: rgba(0,0,0,0.2); height: 10px; border-radius: 10px; overflow: hidden; }
+        .xp-fill { 
+            background: #ffeaa7; height: 100%; width: 0%; 
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* เร่งความเร็ว transition */
+            box-shadow: 0 0 10px rgba(255, 234, 167, 0.6);
+        }
+
+        .stats-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; position: relative; z-index: 2;
+        }
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px; padding: 10px; text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-val { font-size: 1.2rem; font-weight: 800; display: block; }
+        .stat-label { font-size: 0.75rem; opacity: 0.85; font-weight: 400; }
+
+        /* --- Badge Scroller --- */
+        .badge-section { margin-bottom: 20px; }
+        .section-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: var(--text-sub); display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-bar { 
+            display: flex; gap: 10px; overflow-x: auto; padding: 5px 5px 15px 5px; 
+            scrollbar-width: none;
+            /* 🔥 GPU Scroll */
+            -webkit-overflow-scrolling: touch;
+        }
+        .badge-bar::-webkit-scrollbar { display: none; }
+        
+        .badge-item { 
+            min-width: 50px; height: 50px; 
+            background: #f1f2f6; border-radius: 16px; 
+            display: flex; justify-content: center; align-items: center; 
+            font-size: 1.6rem; 
+            filter: grayscale(1); opacity: 0.5; 
+            transition: transform 0.2s, filter 0.2s, opacity 0.2s; 
+            cursor: pointer; position: relative; border: 2px solid transparent;
+        }
+        .badge-item.active { filter: grayscale(0); opacity: 1; background: white; border-color: var(--accent); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .badge-item:active { transform: scale(0.95); }
+        .mult { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 0.6rem; padding: 2px 5px; border-radius: 8px; font-weight: bold; border: 2px solid white; }
+
+        /* --- Category Selector --- */
+        .cat-wrapper { margin-bottom: 25px; position: relative; z-index: 100; }
+        .custom-select { 
+            background: #f1f2f6; padding: 12px 20px; border-radius: 16px; 
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; font-weight: 700; color: var(--text-main);
+            transition: background 0.2s; font-size: 1rem;
+        }
+        .custom-select:active { background: #dfe6e9; }
+        .options-list { 
+            position: absolute; top: 110%; left: 0; right: 0; 
+            background: white; border-radius: 16px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+            max-height: 300px; overflow-y: auto; display: none; 
+            padding: 10px; border: 1px solid #eee;
+            /* เพิ่มความลื่นเวลาเปิด List */
+            animation: fadeIn 0.15s ease-out;
+        }
+        .open .options-list { display: block; }
+        .opt-item { padding: 12px; border-radius: 10px; color: var(--text-main); font-size: 0.95rem; font-weight: 500; }
+        .opt-item:active { background: #f0f3f8; color: var(--primary); }
+
+        /* --- Game Menu Grid --- */
+        .game-menu { display: grid; gap: 20px; }
+
+        .card-main-game {
+            grid-column: 1 / -1;
+            background: linear-gradient(to right, #ffffff, #f8f9fe);
+            border-radius: 20px; padding: 20px 25px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+            cursor: pointer; transition: transform 0.1s, box-shadow 0.1s;
+            border: 2px solid #eef2f7; min-height: 80px; 
+            transform: translateZ(0); /* Force GPU */
+        }
+        .card-main-game:active { transform: scale(0.98); border-color: var(--primary); }
+        .card-main-game .icon-box {
+            width: 50px; height: 50px; background: #eeedff; border-radius: 14px;
+            display: flex; justify-content: center; align-items: center; font-size: 1.6rem; color: var(--primary);
+        }
+        .card-main-game .text-box { flex-grow: 1; margin-left: 20px; text-align: left; }
+        .card-main-game h3 { margin: 0; font-size: 1.2rem; color: var(--primary-dark); font-weight: 800; }
+        .card-main-game p { margin: 3px 0 0; font-size: 0.9rem; color: var(--text-sub); }
+        .card-main-game .arrow { color: var(--primary); font-size: 1.2rem; font-weight: 900; }
+
+        .mini-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px;
+        }
+        .mini-card {
+            background: white; border-radius: 20px; padding: 20px; text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 2px solid #eef2f7;
+            cursor: pointer; transition: transform 0.1s;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 120px; transform: translateZ(0); /* Force GPU */
+        }
+        .mini-card:active { transform: scale(0.96); border-color: #b2bec3; }
+        .mini-icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .mini-label { font-weight: 700; font-size: 1rem; color: var(--text-main); }
+        
+        .footer-reset { margin-top: 30px; text-align: center; }
+        .footer-reset button {
+            background: none; border: none; color: #b2bec3; 
+            font-size: 0.85rem; text-decoration: underline; cursor: pointer; transition: color 0.2s;
+        }
+
+        /* --- 🚀 SMOOTH SCREEN TRANSITIONS --- */
+        .hidden { display: none !important; }
+        
+        /* คลาสสำหรับอนิเมชั่นตอนเปลี่ยนหน้า */
+        .fade-in {
+            animation: fadeInScreen 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes fadeInScreen {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Screens Layout */
+        #screen-mode, #screen-game, #screen-tf, #screen-vowel, #screen-sentence, #screen-end {
+            width: 100%; text-align: center; margin: auto; max-width: 800px;
+        }
+
+        /* Elements inside Game */
+        .big-btn { width: 100%; padding: 15px; border-radius: 16px; font-weight: bold; font-size: 1rem; cursor: pointer; margin-bottom: 12px; border: none; }
+        .next-btn { 
+            background: var(--primary); color: white; border: none; padding: 15px; border-radius: 50px; width: 100%; 
+            font-weight: 800; font-size: 1.1rem; margin-top: 20px; cursor: pointer; 
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4); transition: transform 0.1s;
+        }
+        .next-btn:active { transform: scale(0.98); }
+        
+        .question-box { 
+            background: #f8f9fa; padding: 30px 20px; border-radius: 20px; margin: 20px 0; position: relative; border: 1px solid #eef2f7; 
+            min-height: 120px; display: flex; flex-direction: column; justify-content: center;
+            transform: translateZ(0);
+        }
+        .word-en { color: var(--primary-dark); font-weight: 800; line-height: 1.2; font-size: 2rem !important; }
+        .word-read { font-size: 1rem; color: #636e72; font-style: italic; margin-top: 8px; }
+
+        .choices-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; } 
+        .choice-btn { 
+            background: white; border: 2px solid #dfe6e9; border-radius: 16px; 
+            color: var(--text-main); font-weight: 700; transition: background 0.1s; font-size: 1rem;
+            box-shadow: 0 4px 0 #dfe6e9; min-height: 70px; display: flex; align-items: center; justify-content: center; padding: 10px;
+        }
+        .choice-btn:active { transform: translateY(4px); box-shadow: none; }
+
+        .tf-grid, .vowel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .tf-btn { border-radius: 20px; box-shadow: 0 5px 0 rgba(0,0,0,0.1); font-size: 1.4rem !important; height: 100px !important; }
+        .vowel-btn { border-radius: 16px; box-shadow: 0 4px 0 #bdc3c7; border: 2px solid #bdc3c7; background: white; color: var(--text-main); font-size: 1.6rem !important; height: 80px !important;}
+        
+        .word-chip { background: white; border: 2px solid var(--primary); color: var(--primary); box-shadow: 0 3px 0 var(--primary); margin: 5px; padding: 8px 16px; font-size: 1rem; border-radius: 25px; transition: transform 0.1s; }
+        .word-chip:active { transform: scale(0.95); box-shadow: none; }
+        .sentence-box { border-radius: 16px; border: 2px dashed #b2bec3; background: #fafafa; min-height: 100px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding: 15px; }
+
+        /* Combo & Anim */
+        .combo-badge {
+            background: linear-gradient(45deg, #f1c40f, #e67e22); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 900; font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.4); display: inline-flex; align-items: center; gap: 5px; animation: pulse-combo 0.5s infinite alternate;
+        }
+        .combo-high { background: linear-gradient(45deg, #e74c3c, #c0392b); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.5); transform: scale(1.1); }
+        .combo-god { background: linear-gradient(45deg, #8e44ad, #3498db); box-shadow: 0 0 20px rgba(142, 68, 173, 0.6); }
+        @keyframes pulse-combo { from { transform: scale(1); } to { transform: scale(1.1); } }
+        
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
+        
+/* --- 🔥 TINDER SWIPE STYLES --- */
+.tinder-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* ปรับความสูงพื้นที่การ์ด */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.tinder-card {
+    width: 100%;
+    max-width: 340px;
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    position: absolute;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    transform-origin: 50% 100%;
+    will-change: transform;
+    border: 1px solid #eef2f7;
+    /* ห้ามเลือกข้อความเวลารูด */
+    user-select: none; 
+}
+
+.tinder-card:active {
+    cursor: grabbing;
+}
+
+/* ตัวหนังสือบอกสถานะเวลาปัด */
+.swipe-status {
+    position: absolute;
+    top: 40px;
+    font-size: 3rem;
+    font-weight: 900;
+    opacity: 0;
+    transform: rotate(-15deg);
+    border: 4px solid;
+    padding: 5px 15px;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.status-yes {
+    left: 20px;
+    color: #00b894;
+    border-color: #00b894;
+    transform: rotate(-20deg);
+}
+
+.status-no {
+    right: 20px;
+    color: #ff7675;
+    border-color: #ff7675;
+    transform: rotate(20deg);
+}
+
+/* ปุ่มควบคุมด้านล่าง (เผื่อคนไม่ถนัดปัด) */
+.tinder-controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex; justify-content: center; align-items: center;
+}
+.control-btn:active { transform: scale(0.9); }
+.btn-no { color: #ff7675; border: 2px solid #ff7675; }
+.btn-yes { color: #00b894; border: 2px solid #00b894; }
+
+/* Animation สำหรับตอนปล่อยมือแล้วเด้งออก */
+.fly-left { animation: flyOutLeft 0.5s forwards; }
+.fly-right { animation: flyOutRight 0.5s forwards; }
+
+@keyframes flyOutLeft {
+    to { transform: translate(-150%, 50px) rotate(-30deg); opacity: 0; }
+}
+@keyframes flyOutRight {
+    to { transform: translate(150%, 50px) rotate(30deg); opacity: 0; }
+}
+/* --- 🃏 FLASHCARD PREMIUM STYLES --- */
+.flashcard-container {
+    perspective: 1000px; width: 100%; height: 380px; margin: 20px auto;
+}
+.flashcard {
+    width: 100%; height: 100%; position: relative; cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.4s;
+    transform-style: preserve-3d;
+}
+.flashcard.is-flipped { transform: rotateY(180deg); }
+.flashcard.swipe-left { transform: rotateY(180deg) translateX(-100px) rotate(-15deg); opacity: 0; }
+.flashcard.swipe-right { transform: rotateY(180deg) translateX(100px) rotate(15deg); opacity: 0; }
+
+.flashcard-face {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    border-radius: 30px; background: white; 
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 30px; border: 3px solid #f1f2f6; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+.flashcard-front {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f2f6 100%);
+}
+.flashcard-back {
+    transform: rotateY(180deg); 
+    background: linear-gradient(135deg, #f8f9fa 0%, #e0eafc 100%);
+    border-color: #a29bfe;
+}
+.fc-btn {
+    width: 70px; height: 70px; border-radius: 50%; border: none; font-size: 2rem; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); cursor: pointer; transition: 0.2s cubic-bezier(0.4, 0.2, 0.2, 1); 
+    display:flex; justify-content:center; align-items:center; background: white;
+}
+.fc-btn:active { transform: scale(0.85); }
+.fc-no { color: #ff7675; border: 3px solid #ff7675; }
+.fc-yes { color: #00b894; border: 3px solid #00b894; }
+.fc-hint { animation: pulse 1.5s infinite; color:#a29bfe; font-weight:bold; font-size: 0.95rem; margin-top: 15px; }
+@keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+/* --- 🏆 LEADERBOARD STYLES --- */
+.rank-item { 
+    display: flex; align-items: center; padding: 15px 20px; border-radius: 20px; 
+    margin-bottom: 12px; background: white; border: 2px solid #f1f2f6;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.02); transition: 0.3s;
+}
+.rank-item.is-user { 
+    background: linear-gradient(135deg, var(--primary) 0%, #a29bfe 100%); 
+    border-color: transparent; color: white; 
+    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4); transform: scale(1.02);
+}
+.rank-item.is-user .rank-name { color: white !important; }
+.rank-medal { font-size: 1.8rem; width: 45px; text-align: center; }
+.rank-name { flex-grow: 1; font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
+.rank-score { font-weight: 900; font-size: 1.2rem; background: rgba(0,0,0,0.05); padding: 5px 12px; border-radius: 12px; }
+.rank-item.is-user .rank-score { background: rgba(255,255,255,0.2); color: white; }
+    </style>
+</head>
+<body>
+
+    <audio id="snd-click" src="sounds/click.mp3" preload="auto"></audio>
+    <audio id="snd-correct" src="sounds/collect.mp3" preload="auto"></audio>
+    <audio id="snd-wrong" src="sounds/thud.mp3" preload="auto"></audio>
+    <audio id="snd-win" src="sounds/win.mp3" preload="auto"></audio>
+
+    <div class="container" id="main-container">
+        <div id="screen-home" class="fade-in">
+            
+            <div class="app-header">
+                <h1 class="app-title">Vocab Pro ✨</h1>
+                <div class="header-actions">
+                    <button onclick="playSnd('snd-click'); openMistakes()">
+                        <span>📝</span> 
+                        <span id="m-count" style="position: absolute; top: -2px; right: -2px; background: var(--danger); color: white; font-size: 0.65rem; width: 16px; height: 16px; border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid white;">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-top">
+                    <div class="profile-info">
+                        <span class="rank-label">CURRENT RANK</span>
+                        <h2 class="rank-name" id="rank-txt">🐣 ผู้เริ่มต้น</h2>
+                    </div>
+                    <div class="profile-avatar" id="rank-avatar">🐣</div>
+                </div>
+
+                <div class="xp-wrapper">
+                    <div class="xp-header">
+                        <span id="next-rank-hint">NEXT: ผู้ฝึกหัด</span>
+                        <span id="xp-val">0 / 50 XP</span>
+                    </div>
+                    <div id="ai-mentor-container" style="background: white; border-radius: 24px; padding: 22px; margin-bottom: 25px; border: 1px solid rgba(108, 92, 231, 0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.05); position: relative; overflow: hidden; display: flex; align-items: center; gap: 18px; transition: all 0.3s ease;">
+    <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: rgba(108, 92, 231, 0.05); border-radius: 50%;"></div>
+    
+    <div style="position: relative; flex-shrink: 0;">
+      <img src="image_0.png" alt="AI Mentor Avatar" onclick="openAIStats()" style="cursor: pointer; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; z-index: 2; position: relative; border: 3px solid white; box-shadow: 0 4px 12px rgba(108, 92, 231, 0.25);">
+        
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: var(--primary); opacity: 0.2; border-radius: 50%; animation: ai-pulse 2s infinite;"></div>
+    </div>
+
+    <div style="flex-grow: 1; z-index: 2;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span style="background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 8px; border-radius: 20px; font-weight: 800; letter-spacing: 0.5px;">AI MENTOR</span>
+            <h3 id="ai-status-title" style="margin: 0; color: var(--primary-dark); font-size: 1.05rem; font-weight: 800; letter-spacing: -0.3px;">กำลังเตรียมเนื้อหา...</h3>
+        </div>
+        <p id="ai-daily-summary" style="margin: 0; font-size: 0.92rem; color: var(--text-sub); line-height: 1.5; font-weight: 500;">
+            วันนี้เราจะก้าวข้ามขีดจำกัดไปด้วยกันนะ!
+        </p>
+        <div id="ai-action-btn" style="display: none; margin-top: 12px;">
+            <button onclick="startReviewMode()" style="background: linear-gradient(135deg, var(--primary) 0%, #a29bfe 100%); border: none; padding: 8px 18px; border-radius: 12px; font-size: 0.82rem; font-weight: 700; color: white; cursor: pointer; box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2); transition: transform 0.2s;">
+                ⚔️ เริ่มโหมดล้างแค้น
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes ai-pulse {
+    0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+}
+#ai-mentor-container:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+</style>
+                    <div class="xp-track"><div class="xp-fill" id="xp-fill"></div></div>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <span class="stat-val" id="st-streak">0</span>
+                        <span class="stat-label">🔥 Streak</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="st-win">0%</span>
+                        <span class="stat-label">⚡ Level</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-val" id="st-total">0</span>
+                        <span class="stat-label">📚 Words</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge-section">
+                <span class="section-title">Achievements</span>
+                <div class="badge-bar">
+                    <div class="badge-item" id="b-play" onclick="playSnd('snd-click'); alert('🔰 เริ่มก้าวแรก: เล่นอย่างน้อย 1 ครั้ง')">🔰</div>
+                    <div class="badge-item" id="b-cor" onclick="playSnd('snd-click'); alert('🔥 จ้าวแห่งคำศัพท์: ตอบถูกสะสมครบทุก 50 ข้อ')">🔥<span class="mult" id="m-cor" style="display:none">x1</span></div>
+                    <div class="badge-item" id="b-perf" onclick="playSnd('snd-click'); alert('🏆 สมบูรณ์แบบ: ตอบถูก 100% ครบทุกรอบ')">🏆<span class="mult" id="m-perf" style="display:none">x1</span></div>
+                    <div class="badge-item" id="b-xp" onclick="playSnd('snd-click'); alert('👑 ระดับสูง: สะสมครบ 300 XP')">👑</div>
+                    <div class="badge-item" id="b-streak" onclick="playSnd('snd-click'); alert('⚡ นักสปีดรัน: ตอบถูกต่อเนื่อง 10 ข้อในรอบเดียว')">⚡</div>
+                    <div class="badge-item" id="b-coll" onclick="playSnd('snd-click'); alert('💎 นักสะสม: มีคำศัพท์ในสมุดจดครบ 10 คำ')">💎</div>
+                    <div class="badge-item" id="b-marathon" onclick="playSnd('snd-click'); alert('🛡️ มาราธอน: เล่นจบโหมด 30 ข้อ')">🛡️</div>
+                    <div class="badge-item" id="b-legend" onclick="playSnd('snd-click'); alert('🌌 ตำนาน: สะสมครบ 2,000 XP')">🌌</div>
+                    <div class="badge-item" id="b-god" onclick="playSnd('snd-click'); alert('🧿 ตาทิพย์: สถิติตอบถูกติดต่อกัน 20 ข้อขึ้นไป')">🧿</div>
+                    <div class="badge-item" id="b-clean" onclick="playSnd('snd-click'); alert('🧹 นักกวาดล้าง: ลบคำศัพท์ออกจากสมุดจดศัพท์จนหมด')">🧹</div>
+                    <div class="badge-item" id="b-time" onclick="playSnd('snd-click'); alert('⏳ เหนือกาลเวลา: จบรอบโดยเวลาไม่เคยต่ำกว่าครึ่งหลอด')">⏳</div>
+                    <div class="badge-item" id="b-king" onclick="playSnd('snd-click'); alert('👑 ราชาศัพท์: เล่นจบโหมด ทั้งหมด ครบ 5 ครั้ง')">✨</div>
+                </div>
+            </div>
+
+            <div class="cat-wrapper" id="cat-select" onclick="toggleCat()">
+                <div class="custom-select">
+                    <span id="selected-cat">🔥 รวมทุกหมวด</span>
+                    <span style="color: #b2bec3;">▼</span>
+                </div>
+                <div class="options-list" id="cat-list"></div>
+            </div>
+
+            <div class="game-menu">
+                <div class="card-main-game" onclick="playSnd('snd-click'); showScreen('screen-mode')">
+                    <div class="icon-box">🇬🇧</div>
+                    <div class="text-box">
+                        <h3>ติวศัพท์พื้นฐาน</h3>
+                        <p>โหมดมาตรฐาน 4 ตัวเลือก</p>
+                    </div>
+                    <div class="arrow">➜</div>
+                </div>
+
+                <div class="mini-grid">
+                    <div class="mini-card tf-card" onclick="startTFGame()">
+                        <div class="mini-icon" style="color:var(--success)">⚡</div>
+                        <div class="mini-label">ใช่/ไม่ใช่</div>
+                    </div>
+                    <div class="mini-card vo-card" onclick="startVowelGame()">
+                        <div class="mini-icon" style="color:var(--accent)">🧩</div>
+                        <div class="mini-label">เติมสระ</div>
+                    </div>
+                    <div class="mini-card sen-card" onclick="startSentenceGame()">
+                        <div class="mini-icon" style="color:#0984e3">📝</div>
+                        <div class="mini-label">เรียงประโยค</div>
+                    </div>
+                    <div class="mini-card" onclick="startFlashcardMode()">
+                        <div class="mini-icon" style="color:#9b59b6">🃏</div>
+                        <div class="mini-label">แฟลชการ์ด</div>
+                    </div>
+                    <div class="mini-card" onclick="openLeaderboard()">
+                        <div class="mini-icon" style="color:#e1b12c">🏆</div>
+                        <div class="mini-label">จัดอันดับ</div>
+                    </div>
+                    <div class="mini-card" style="background:#f5f6fa;" onclick="playSnd('snd-click'); alert('Coming Soon!')">
+                        <div class="mini-icon" style="filter:grayscale(1); opacity:0.3;">🔒</div>
+                        <div class="mini-label" style="color:#b2bec3;">เร็วๆ นี้</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-reset">
+                <button onclick="playSnd('snd-click'); if(confirm('ล้างคะแนนทั้งหมด?')) {localStorage.clear(); location.reload();}">ล้างข้อมูลเกม</button>
+            </div>
+        </div>
+
+        <div id="screen-mode" class="hidden">
+            <h3 style="margin: 0 0 20px; color: var(--primary-dark); font-size: 1.3rem;">จำนวนข้อที่ต้องการ</h3>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+                <button class="choice-btn" style="padding: 15px; box-shadow:none; justify-content: flex-start; gap: 15px;" onclick="playSnd('snd-click'); startGame(10)">
+                    <span style="font-size: 1.2rem;">🎯</span> 10 ข้อ (เร็ว)
+                </button>
+                <button class="choice-btn" style="padding: 15px; box-shadow:none; justify-content: flex-start; gap: 15px;" onclick="playSnd('snd-click'); startGame(20)">
+                    <span style="font-size: 1.2rem;">🎯</span> 20 ข้อ (กำลังดี)
+                </button>
+                <button class="choice-btn" style="padding: 15px; box-shadow:none; justify-content: flex-start; gap: 15px;" onclick="playSnd('snd-click'); startGame(30)">
+                    <span style="font-size: 1.2rem;">🎯</span> 30 ข้อ (เน้นๆ)
+                </button>
+                <button class="choice-btn" style="padding: 15px; box-shadow:none; border-color: var(--danger); color: var(--danger); justify-content: flex-start; gap: 15px;" onclick="playSnd('snd-click'); startGame(0)">
+                    <span style="font-size: 1.2rem;">🔥</span> ทั้งหมด (มาราธอน)
+                </button>
+            </div>
+            <button onclick="playSnd('snd-click'); showScreen('screen-home')" style="margin-top:25px; border:none; background:none; color:#b2bec3; font-weight: bold; cursor: pointer; font-size: 1rem;">✕ ยกเลิก</button>
+        </div>
+
+        <div id="screen-game" class="hidden">
+         <div id="combo-normal" style="position:absolute; top:10px; left:0; right:0; margin:auto; width:fit-content; z-index:10;"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+                <button onclick="playSnd('snd-click'); location.reload()" style="background:#f1f2f6; border:none; padding:8px 15px; border-radius:12px; font-weight: bold; cursor: pointer; color: var(--text-sub); font-size: 0.9rem;">🏠 ออก</button>
+                <div id="score-txt" style="font-weight:900; color:var(--primary); font-size: 1.1rem;">Score: 0</div>
+            </div>
+            
+            <button id="btn-5050" style="width:100%; padding:10px; border:2px solid var(--accent); color:var(--accent); background: white; border-radius:12px; font-weight:bold; cursor:pointer; margin-bottom:15px; font-size: 1rem;" onclick="use5050()">⚡ ตัวช่วย 50/50</button>
+            
+            <div class="question-box">
+               <div id="combo-vo" style="position:absolute; top:-15px; left:10px; z-index:10;"></div>
+                <div id="prog-txt" style="position:absolute; top:10px; right:15px; font-weight: bold; color: #b2bec3; font-size: 0.9rem;">1/10</div>
+                <div class="word-en" id="q-word">Word</div>
+                <div class="word-read" id="q-read" style="font-size: 1rem; color: #636e72; font-style: italic; margin-top: 5px;">/ Reading /</div>
+                <div class="timer-bar" id="t-bar" style="position: absolute; bottom: 0; left: 0; height: 6px; background: var(--accent); width: 100%; border-radius: 0 0 20px 20px;"></div>
+            </div>
+            <div class="choices-grid" id="choices-area"></div>
+            <button id="btn-next" class="next-btn hidden" onclick="playSnd('snd-click'); nextQ()">ข้อต่อไป ➜</button>
+        </div>
+
+<div id="screen-tf" class="hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 10px;">
+        <button onclick="playSnd('snd-click'); location.reload()" style="background:#f1f2f6; border:none; padding:8px 15px; border-radius:12px; font-weight: bold; cursor: pointer; color: var(--text-sub);">🏠 ออก</button>
+        <div id="tf-score-txt" style="font-weight:900; color:var(--primary); font-size: 1.1rem;">Score: 0</div>
+    </div>
+    
+    <div class="life-bar" id="tf-life" style="margin-bottom:10px; font-size:1.4rem;">❤️❤️❤️</div>
+    
+    <p style="color:#b2bec3; font-size:0.9rem; margin-bottom:10px;">ปัดขวา = ใช่ ✅ / ปัดซ้าย = ไม่ใช่ ❌</p>
+
+    <div class="tinder-container">
+        <div id="tf-card" class="tinder-card">
+           <div id="combo-tf" style="position:absolute; top:15px; left:15px; z-index:100;"></div>
+            <div class="swipe-status status-yes" id="txt-yes">YES</div>
+            <div class="swipe-status status-no" id="txt-no">NOPE</div>
+
+            <div class="word-en" id="tf-word" style="margin-bottom: 15px; font-size: 2.2rem;">Word</div>
+            <div style="font-size: 1rem; color: #b2bec3; margin-bottom: 15px;">แปลว่า...</div>
+            <div class="word-en" id="tf-mean" style="font-size: 1.8rem; color: var(--text-main);">ความหมาย</div>
+            
+            <div class="timer-bar" id="tf-bar" style="position: absolute; bottom: 0; left: 0; height: 8px; background: var(--danger); width: 100%; border-radius: 0 0 20px 20px;"></div>
+        </div>
+    </div>
+
+    <div class="tinder-controls">
+        <button class="control-btn btn-no" onclick="manualSwipe('left')">❌</button>
+        <button class="control-btn btn-yes" onclick="manualSwipe('right')">✅</button>
+    </div>
+</div>
+        <div id="screen-vowel" class="hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+                <button onclick="playSnd('snd-click'); location.reload()" style="background:#f1f2f6; border:none; padding:8px 15px; border-radius:12px; font-weight: bold; cursor: pointer; color: var(--text-sub); font-size: 0.9rem;">🏠 ออก</button>
+                <div id="vo-score-txt" style="font-weight:900; color:var(--primary); font-size: 1.1rem;">Score: 0</div>
+            </div>
+            <div class="life-bar" id="vo-life" style="margin-bottom:15px; font-size:1.4rem;">❤️❤️❤️</div>
+            <div class="question-box" style="padding: 30px 10px;">
+                <div id="combo-vo" style="position:absolute; top:10px; left:0; right:0; margin:auto; width:fit-content; z-index:10;"></div>
+                <div style="font-size: 1rem; color: #b2bec3;">เติมสระที่หายไป</div>
+                <div class="word-en" id="vo-word" style="font-size: 2.2rem; letter-spacing: 3px; margin: 15px 0;">W_RD</div>
+                <div class="word-read" id="vo-mean" style="font-size: 1.1rem; color: var(--text-main);">(ความหมาย)</div>
+                <div class="timer-bar" id="vo-bar" style="position: absolute; bottom: 0; left: 0; height: 6px; background: var(--primary); width: 100%; border-radius: 0 0 20px 20px;"></div>
+            </div>
+            <div class="vowel-grid" id="vo-choices"></div>
+        </div>
+
+        <div id="screen-sentence" class="hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+                <button onclick="playSnd('snd-click'); location.reload()" style="background:#f1f2f6; border:none; padding:8px 15px; border-radius:12px; font-weight: bold; cursor: pointer; color: var(--text-sub); font-size: 0.9rem;">🏠 ออก</button>
+                <div id="sen-score-txt" style="font-weight:900; color:var(--primary); font-size: 1.1rem;">Score: 0</div>
+            </div>
+            <div class="life-bar" id="sen-life" style="margin-bottom:15px; font-size:1.4rem;">❤️❤️❤️</div>
+
+            <div class="question-box" style="padding: 30px 15px;">
+                <div id="combo-sen" style="position:absolute; top:-15px; left:10px; z-index:10;"></div>
+                <div style="font-size: 1rem; color: #b2bec3;">จงเรียงประโยคให้ถูกต้อง</div>
+                <div class="word-en" id="sen-mean" style="font-size: 1.3rem; margin-top:10px; color:var(--text-main);">ฉัน ไป โรงเรียน</div>
+            </div>
+
+            <div id="sen-answer-area" class="sentence-box">
+                <span style="color:#bdc3c7; font-size:0.9rem;">(แตะคำด้านล่างเพื่อเรียง)</span>
+            </div>
+            
+            <div id="sen-feedback" class="hidden" style="margin: 15px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeeba; border-radius: 12px; color: #856404; font-size: 1rem;"></div>
+
+            <button id="sen-check-btn" class="next-btn hidden" style="margin: 15px 0; background: var(--success); box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);" onclick="checkSentence()">✅ ตรวจคำตอบ</button>
+            <button id="sen-next-btn" class="next-btn hidden" style="margin: 15px 0;" onclick="playSnd('snd-click'); nextSentenceQ()">ข้อต่อไป ➜</button>
+
+            <div id="sen-choices" class="sentence-choices" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 15px;"></div>
+        </div>
+        <div id="leaderboard-modal" class="modal-overlay hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 10000; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box;">
+        <div style="background:#f8f9fa; padding:30px; border-radius:30px; width:100%; max-width:450px; max-height: 85vh; overflow-y: auto; position:relative; box-shadow: 0 25px 60px rgba(0,0,0,0.3); text-align: center;">
+            <button onclick="closeLeaderboard()" style="position:absolute; top:20px; right:20px; background:white; border:none; width:40px; height:40px; border-radius:50%; font-size:1.5rem; cursor:pointer; color:var(--text-sub); transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">✕</button>
+            
+            <div style="margin-bottom: 25px;">
+                <span style="font-size: 4rem; filter: drop-shadow(0 5px 10px rgba(225, 177, 44, 0.3));">🏆</span>
+                <h2 style="margin: 10px 0 5px 0; color: var(--primary-dark); font-size: 1.8rem;">Leaderboard</h2>
+                <p style="margin: 0; color: #b2bec3; font-size: 0.95rem; font-weight:bold;">แข่งขันเก็บ XP (รีเฟรชบอททุก 2 นาที)</p>
+            </div>
+            
+            <div id="lb-list" style="text-align: left; margin-top: 20px;">
+                </div>
+            
+            <button class="next-btn" onclick="closeLeaderboard()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 1.1rem; border-radius: 20px;">ออกไปลุยเก็บแต้ม!</button>
+        </div>
+    </div>
+       <div id="screen-flashcard" class="hidden">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+                <button onclick="playSnd('snd-click'); location.reload()" style="background:#f1f2f6; border:none; padding:10px 18px; border-radius:16px; font-weight: bold; cursor: pointer; color: var(--text-sub); font-size: 0.95rem;">🏠 กลับหน้าหลัก</button>
+                <div style="text-align: right;">
+                    <div id="fc-progress-txt" style="font-weight:900; color:var(--primary); font-size: 1.1rem;">1 / 20</div>
+                </div>
+            </div>
+            
+            <div style="background: #dfe6e9; height: 8px; border-radius: 4px; overflow: hidden; margin-bottom: 20px;">
+                <div id="fc-progress-bar" style="background: var(--primary); width: 5%; height: 100%; transition: width 0.3s;"></div>
+            </div>
+
+            <div class="flashcard-container">
+                <div id="fc-card" class="flashcard" onclick="flipCard()">
+                    <div class="flashcard-face flashcard-front">
+                       <span style="font-size: 2rem; margin-bottom: 10px; filter: drop-shadow(0 5px 7px rgba(0,0,0,0.1));">❓</span>
+                        <div class="word-en" id="fc-word-en" style="font-size: 2.8rem; text-align: center; color: var(--text-main); font-weight: 800;">Word</div>
+                        <div class="fc-hint">🪄 Tap to flip ✨</div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <span style="font-size: 2.2rem; margin-bottom: 12px; opacity: 0.8;">💡</span>
+                        <div class="word-en" id="fc-word-th" style="font-size: 1.8rem; color: var(--primary-dark); text-align: center; font-weight: 800; line-height: 1.4; padding: 0 10px;">ความหมาย</div>
+                        <div class="word-read" id="fc-word-read" style="margin-top: 18px; font-size: 1.1rem; color: #636e72; background: white; padding: 6px 18px; border-radius: 14px; border: 2px dashed #dfe6e9; font-family: monospace;">/ read /</div>
+                    </div>
+                 </div>
+            </div>
+
+            <div class="fc-controls" id="fc-controls" style="opacity: 0.3; pointer-events: none; transition: 0.3s; margin-top: 30px; display:flex; justify-content:center; gap:40px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <button class="fc-btn fc-no" onclick="swipeFlashcard(false)">❌</button>
+                    <span style="font-size:0.85rem; font-weight:bold; color:#ff7675;">จำไม่ได้ (วนใหม่)</span>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+                    <button class="fc-btn fc-yes" onclick="swipeFlashcard(true)">✅</button>
+                    <span style="font-size:0.85rem; font-weight:bold; color:#00b894;">จำได้แล้ว (ผ่าน)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="screen-end" class="hidden">
+            <h2 id="end-msg" style="font-size: 1.8rem; margin-bottom: 10px;">จบการติว! 🎉</h2>
+            <div id="stars" style="font-size:4rem; margin-bottom:15px; letter-spacing: 5px;"></div>
+            <h1 id="f-score" style="margin:0; font-size: 3rem; color: var(--primary);">0</h1>
+            <p style="color:#b2bec3; margin:0 0 20px; font-size: 1rem;">คะแนนรวม</p>
+            
+            <p id="bonus-notif" style="color: var(--accent); font-weight: bold; height: 20px; font-size: 1rem;"></p>
+            <p id="streak-summary" style="color: #636e72; font-size: 1rem; margin-top: 5px;"></p>
+           <div id="ai-postgame-container" style="background: #f8f9fa; border-radius: 20px; padding: 15px; margin: 20px auto 0; text-align: left; border: 2px dashed #dfe6e9; display: flex; align-items: center; gap: 15px; max-width: 90%;">
+                <img src="image_0.png" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; flex-shrink: 0;">
+                <div>
+                    <span style="font-size: 0.75rem; font-weight: 800; color: var(--primary); letter-spacing: 0.5px;">แพทริควิเคราะห์ให้ฟัง 🌟</span>
+                    <p id="ai-postgame-msg" style="margin: 5px 0 0; font-size: 0.95rem; color: var(--text-main); font-weight: 600; line-height: 1.4;"></p>
+                </div>
+            </div>
+            <button class="next-btn" onclick="playSnd('snd-click'); location.reload()" style="margin-top: 30px;">🔄 หน้าหลัก</button>            
+        </div>
+    </div>
+
+<div id="ai-stats-modal" class="modal-overlay hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 10000; display: flex; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box;">
+        <div style="background:white; padding:30px; border-radius:30px; width:100%; max-width:650px; max-height: 90vh; overflow-y: auto; position:relative; box-shadow: 0 25px 60px rgba(0,0,0,0.3); text-align: center;">
+            <button onclick="closeAIStats()" style="position:absolute; top:20px; right:20px; background:#f1f2f6; border:none; width:40px; height:40px; border-radius:50%; font-size:1.5rem; cursor:pointer; color:var(--text-sub); transition: 0.2s;">✕</button>
+            
+            <div style="display:flex; align-items:center; gap:20px; margin-bottom: 25px; text-align:left;">
+                <img src="image_0.png" style="width: 75px; height: 75px; border-radius: 50%; border: 4px solid var(--primary); object-fit: cover; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);">
+                <div>
+                    <h3 style="color: var(--primary-dark); margin: 0; font-size: 1.5rem;">Patrick AI</h3>
+                    <p style="margin: 0; font-size: 1rem; color: var(--text-sub); font-weight: 600;">ศูนย์ประเมินความพร้อมก่อนสอบ</p>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                
+                <div style="background: linear-gradient(135deg, #f8f9fa 0%, #f1f2f6 100%); border-radius: 20px; padding: 20px; border: 1px solid #dfe6e9; text-align: left; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:12px;">
+                        <span style="font-weight: 800; color: var(--text-main); font-size: 1.1rem;">📚 ระดับการเก็บคำศัพท์</span>
+                        <span id="ai-ready-pct" style="font-size: 2rem; font-weight: 900; color: var(--success); line-height: 1;">0%</span>
+                    </div>
+                    <div style="background: #dfe6e9; height: 15px; border-radius: 10px; overflow: hidden; margin-bottom: 12px;">
+                        <div id="ai-ready-bar" style="background: var(--success); width: 0%; height: 100%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 10px;"></div>
+                    </div>
+                    <p id="ai-ready-text" style="margin: 0; font-size: 0.95rem; color: var(--text-sub); font-weight: 600;">กำลังวิเคราะห์ข้อมูล...</p>
+                </div>
+
+                <div style="background: white; border-radius: 20px; padding: 20px; border: 1px solid #dfe6e9; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
+                    <span style="font-weight: 800; color: var(--text-main); font-size: 1.1rem; display:block; margin-bottom:15px;">📊 เวลาติวสะสม</span>
+                    <div id="ai-chart-area" style="display:flex; justify-content:space-between; align-items:flex-end; height: 100px; padding-bottom: 5px; border-bottom: 2px dashed #f1f2f6;">
+                        </div>
+                    <div id="ai-chart-labels" style="display:flex; justify-content:space-between; margin-top: 10px; font-size: 0.8rem; color: #b2bec3; font-weight: bold;">
+                        </div>
+                </div>
+            </div>
+
+            <div style="background: #fff0f0; border-radius: 20px; padding: 20px; margin-top: 20px; text-align: left; border: 1px dashed var(--danger);">
+                <p style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--danger); font-weight: bold;">
+                    🎯 เรดาร์สแกนจุดอ่อน (หมวดที่พลาดบ่อย)
+                </p>
+                <div id="ai-weakness-radar" style="font-size: 0.95rem; color: var(--text-main); background: white; padding: 15px; border-radius: 15px; border: 1px solid #fbeeb8;">
+                    </div>
+            </div>
+            
+            <button class="next-btn" onclick="closeAIStats()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 1.1rem; border-radius: 20px;">รับทราบ ลุยต่อ!</button>
+        </div>
+    </div>
+    <div id="m-modal" class="modal-overlay hidden">
+        <div style="background:white; padding:25px; border-radius:20px; width:90%; max-width:400px; max-height:70vh; overflow-y:auto; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+            <h3 style="color: var(--danger); margin-top: 0; display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">📝</span> คำที่ควรเน้น
+            </h3>
+            
+            <button id="btn-revenge" class="next-btn" onclick="startReviewMode()" style="background: var(--danger); margin-bottom: 15px; display:none; box-shadow: 0 4px 15px rgba(255, 118, 117, 0.4);">
+                ⚔️ ล้างแค้น (ทบทวนคำผิด)
+            </button>
+
+            <div id="m-list" style="text-align: left; margin-top: 15px;"></div>
+            
+            <button class="next-btn" style="margin-top:20px; background: #dfe6e9; color: var(--text-main); box-shadow:none;" onclick="playSnd('snd-click'); document.getElementById('m-modal').classList.add('hidden')">
+                ปิดสมุด
+            </button>
+        </div>
+    </div>
+    
+    <script src="words.js"></script>
+    <script src="verbs3.js"></script>
+    <script src="sentences.js"></script>
+    <script src="adjectives.js"></script>
+    <script src="nouns.js"></script>
+    <script src="pronouns.js"></script>
+
+    <script>
+        let isReviewMode = false;
+        // --- 🔗 รวมข้อมูล ---
+        if (typeof vocabDatabase === 'undefined') { window.vocabDatabase = []; }
+        if (typeof irregularVerbs !== 'undefined') { vocabDatabase.push(...irregularVerbs); }
+        if (typeof sentenceDB === 'undefined') { window.sentenceDB = [{en:"Test sentence", th:"ทดสอบ", level:"easy"}]; }
+
+        // --- Data ---
+        const ranks = [
+            {xp:0, t:"🐣 ผู้เริ่มต้น", c:"#ecf0f1", icon:"🐣"}, 
+            {xp:800, t:"✏️ ผู้ฝึกหัด", c:"#bdc3c7", icon:"✏️"},
+            {xp:1200, t:"📚 นักเรียนดีเด่น", c:"#3498db", icon:"📚"}, 
+            {xp:2500, t:"🎓 ปรมาจารย์", c:"#f1c40f", icon:"🎓"},
+            {xp:6000, t:"👑 เทพเจ้าคำศัพท์", c:"#e67e22", icon:"👑"}, 
+            {xp:8000, t:"🧙 เซียนภาษา", c:"#9b59b6", icon:"🧙"},
+            {xp:12000, t:"🌌 จอมจักรพรรดิ", c:"#1abc9c", icon:"🌌"}, 
+            {xp:25000, t:"🚀 ตำนานไร้พ่าย", c:"#e74c3c", icon:"🚀"}
+        ];
+
+        let tXP = parseInt(localStorage.getItem('tXP'))||0, 
+            tCor = parseInt(localStorage.getItem('tCor'))||0, 
+            tPerf = parseInt(localStorage.getItem('tPerf'))||0, 
+            mistakes = JSON.parse(localStorage.getItem('vMis'))||[],
+            maxStreak = parseInt(localStorage.getItem('maxStreak'))||0,
+            hasPlayed30 = localStorage.getItem('hasPlayed30') === 'true',
+            hasCleaned = localStorage.getItem('hasCleaned') === 'true',
+            allModeCount = parseInt(localStorage.getItem('allModeCount'))||0,
+            perfectTimeCount = parseInt(localStorage.getItem('perfectTimeCount'))||0;
+        
+        let qs = [], qIdx = 0, score = 0, isAns = false, tInt, fUsed = false, corInRound = 0, selCat = 'all';
+        let currentStreak = 0;
+
+        let tfLives = 3, tfScore = 0, tfCorrect = false, tfInt;
+        let voLives = 3, voScore = 0, voCorrect = '', voInt;
+
+        window.onload = () => { updateUI(); updateAIMentorHome(); genCats(); };
+
+        // Helper
+        function setTxt(id, txt) { const el = document.getElementById(id); if(el) el.innerText = txt; }
+        function playSnd(id) { const s = document.getElementById(id); if(s) { s.pause(); s.currentTime = 0; s.play().catch(()=>{}); } }
+        
+        // --- 🚀 Optimized Show Screen ---
+        function showScreen(id) { 
+            // Hide all first
+            document.querySelectorAll('.container > div').forEach(s => {
+                if (!s.classList.contains('hidden')) {
+                    s.classList.add('hidden');
+                    s.classList.remove('fade-in'); // Reset animation
+                }
+            }); 
+            
+            // Show new one with Animation
+            const next = document.getElementById(id);
+            next.classList.remove('hidden'); 
+            next.classList.add('fade-in'); // Trigger Fade In
+            
+            if(id==='screen-home') updateUI(); 
+        }
+
+        function toggleCat() { playSnd('snd-click'); document.getElementById('cat-select').classList.toggle('open'); }
+
+        function genCats() {
+            const area = document.getElementById('cat-list'); 
+            // 🔥 Check if already generated to prevent stutter
+            if(area && area.children.length > 0) return;
+
+           const cats = [
+    {v:'all', t:'🔥 รวมทุกหมวด'}, 
+    {v:'verbs3', t:'⚡ กริยา 3 ช่อง'},
+    {v:'sen-easy', t:'🌱 ประโยค: ง่าย (Easy)'},
+    {v:'sen-medium', t:'🌿 ประโยค: ปานกลาง (Medium)'},
+    {v:'sen-hard', t:'🌳 ประโยค: ยาก (Hard)'},
+    {v:'body', t:'👀 ร่างกาย'}, {v:'home', t:'🏠 ของใช้บ้าน'},
+    {v:'clothing', t:'👕 เสื้อผ้า'}, {v:'feelings', t:'😊 ความรู้สึก'}, {v:'food', t:'🍔 อาหาร'},
+    {v:'family', t:'👨‍👩‍👧‍👦 ครอบครัว'}, {v:'school', t:'🏫 โรงเรียน'}, {v:'places', t:'🏙️ สถานที่'},
+    {v:'action', t:'🏃‍♂️ คำกริยา'}, {v:'jobs', t:'👮 อาชีพ'}, {v:'description', t:'📏 ลักษณะ'},
+    {v:'animal', t:'🐶 สัตว์'}, {v:'vehicle', t:'🚗 ยานพาหนะ'}, {v:'color', t:'🎨 สี/ทรง'},
+    {v:'time', t:'📅 วัน/เวลา'}, {v:'sports', t:'⚽ กีฬา'},{ v: 'hobby', t: '🧸 งานอดิเรก' }, {v:'fruits', t:'🍏 ผลไม้/ผัก'},
+    {v:'nature', t:'⛈️ ธรรมชาติ'}, {v:'technology', t:'💻 เทคโนโลยี'}, {v:'grammar', t:'🗣️ ไวยากรณ์'},
+    {v:'personality', t:'🎭 นิสัย'}, {v:'shopping', t:'🛍️ ซื้อของ'}, {v:'education', t:'🎓 การศึกษา'},
+    {v:'health', t:'🏥 สุขภาพ'}, {v:'travel', t:'✈️ ท่องเที่ยว'}, {v:'law', t:'⚖️ กฎหมาย'},
+    {v:'space', t:'🌌 อวกาศ'}, {v:'environment', t:'♻️ สิ่งแวดล้อม'}, 
+    {v:'tools', t:'🛠️ เครื่องมือ'}, // <--- แก้ให้แล้วครับ
+    { v: 'fantasy_creature', t: '🐉 สัตว์ในตำนาน' },
+    {v:'materials', t:'⛓️ วัสดุ'}, {v:'phrasal_verb', t:'🔥 กริยาวลี (Phrasal Verbs)'},
+    { v: 'slang', t: '👾 แสลง' },{ v: 'military', t: '🪖 การทหาร' }, {v:'idioms', t:'💬 สำนวน (Idioms)'},{ v: 'basic', t: '👤 พื้นฐาน (Basic)' }
+];
+            
+            if(area) { 
+                area.innerHTML = ''; 
+                cats.forEach(c => { 
+                    const d = document.createElement('div'); 
+                    d.className = 'opt-item'; 
+                    d.innerText = c.t; 
+                    d.onclick = (e) => { 
+                        playSnd('snd-click'); 
+                        selCat = c.v;
+                        document.getElementById('selected-cat').innerText = c.t; 
+                        e.stopPropagation(); 
+                        document.getElementById('cat-select').classList.remove('open'); 
+                    }; 
+                    area.appendChild(d); 
+                }); 
+            }
+        }
+
+        function updateUI() {
+            let cur = ranks[0], nxt = ranks[1];
+            ranks.forEach((r, i) => { if (tXP >= r.xp) { cur = r; nxt = ranks[i+1] || r; } });
+            
+            setTxt('rank-txt', cur.t);
+            const av = document.getElementById('rank-avatar'); if(av && cur.icon) av.innerText = cur.icon;
+            
+            const xpFill = document.getElementById('xp-fill'); 
+            if(xpFill) xpFill.style.width = Math.min(((tXP-cur.xp)/(nxt.xp-cur.xp||1))*100, 100) + '%';
+            
+            setTxt('xp-val', `${tXP} / ${nxt.xp} XP`);
+            setTxt('next-rank-hint', `NEXT: ${nxt.t}`);
+            setTxt('m-count', mistakes.length);
+            setTxt('st-streak', maxStreak);
+            setTxt('st-total', tCor); 
+            setTxt('st-win', (tXP > 0 ? Math.floor(tXP/10) : 0)); 
+
+            const checkBadge = (id, cond) => { const el = document.getElementById(id); if(el && cond) el.classList.add('active'); };
+            if(tXP > 0) checkBadge('b-play', true);
+            if(tCor >= 50) { checkBadge('b-cor', true); const mc = document.getElementById('m-cor'); if(mc){ mc.style.display='block'; mc.innerText = 'x'+Math.floor(tCor/50); } }
+            if(tPerf >= 1) { checkBadge('b-perf', true); const mp = document.getElementById('m-perf'); if(mp){ mp.style.display='block'; mp.innerText = 'x'+tPerf; } }
+            checkBadge('b-xp', tXP >= 300); checkBadge('b-streak', maxStreak >= 10); checkBadge('b-god', maxStreak >= 20);
+            checkBadge('b-coll', mistakes.length >= 10); checkBadge('b-marathon', hasPlayed30); checkBadge('b-legend', tXP >= 2000);
+            checkBadge('b-clean', hasCleaned); checkBadge('b-time', perfectTimeCount > 0); checkBadge('b-king', allModeCount >= 5);
+        }
+        // --- 💬 คลังคำพูด AI เชียร์สดในเกม ---
+const aiCoachMsgs = {
+    wrong: [
+        "โดนหลอกซะแล้ว! ไม่เป็นไรครับ",
+        "อย่าเพิ่งถอนหายใจนะ! ผิดเพื่อจำ",
+        "คำนี้ยากจริงครับ ยอมรับเลย แต่ผมจดลงสมุดไว้ให้แล้วนะ",
+        "คำนี้มันคล้ายกันมาก คราวหน้าไม่พลาดแน่",
+        "พลาดข้อนี้ ไม่ได้แปลว่าเราไม่เก่ง ลุยต่อข้อต่อไปเลย!"
+    ],
+    correct: [
+        "เฉียบ! ตอบแบบนี้กรรมการให้เต็มครับ",
+        "มาถูกทางแล้วครับ เก็บเล็กผสมน้อยแบบนี้แหละเวิร์กสุด",
+        "สุดยอด! สมองคุณเริ่มประมวลผลศัพท์ไวขึ้นแล้วนะ",
+        "เก่งมากครับ",
+        "เอาไป10/10 แบบนี้เก็บนิ่มครับ",
+        "ใช่เลย! คำนี้ถ้าเจอในห้องสอบก็กินนิ่มครับ"
+    ],
+    combo: [
+        "🔥 เครื่องร้อนแล้ว! สมาธิดีมาก ลุยต่อเลยเพื่อน!",
+        "🚀 คอมโบต่อเนื่อง! ฟอร์มความนิ่งแบบนี้แหละที่ต้องใช้สอบ!",
+        "⚡ เทพจัด! ตอบถูกติดๆ กันแบบนี้ เอาตำแหน่งไปเลยไหม?"
+    ]
+};
+
+let coachTimeout;
+function showAICoach(type, combo = 0) {
+    let msgList = aiCoachMsgs[type];
+    
+    // ถ้าตอบถูกติดกัน 3 ข้อขึ้นไป ให้ใช้คำชมแบบ Combo
+    if (type === 'correct' && combo >= 3) {
+        msgList = aiCoachMsgs['combo'];
+    }
+    
+    const msg = msgList[Math.floor(Math.random() * msgList.length)];
+    const toast = document.getElementById('ai-coach-toast');
+    document.getElementById('ai-coach-msg').innerText = msg;
+    
+    toast.classList.remove('hidden');
+    toast.style.transform = 'translate(-50%, 0)';
+    toast.style.opacity = '1';
+    
+    clearTimeout(coachTimeout);
+    coachTimeout = setTimeout(() => {
+        toast.style.transform = 'translate(-50%, -20px)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.classList.add('hidden'), 300);
+    }, 3000); // ข้อความจะลอยขึ้นมา 3 วินาทีแล้วจางหายไป
+}
+
+function updateAIMentorHome() {
+    const titleEl = document.getElementById('ai-status-title');
+    const summaryEl = document.getElementById('ai-daily-summary');
+    const actionBtn = document.getElementById('ai-action-btn');
+
+    const totalWords = parseInt(localStorage.getItem('tCor')) || 0;
+    const currentMistakes = JSON.parse(localStorage.getItem('vMis')) || [];
+    const maxStreak = parseInt(localStorage.getItem('maxStreak')) || 0;
+    
+    // ⏱️ ดึงข้อมูลเวลาเรียนสะสม (นาที)
+    const studyMins = parseInt(localStorage.getItem('studyMins')) || 0;
+
+    // --- 📚 คลังคำพูดของ AI (โทนเพื่อนติวเตอร์ พอดีๆ ไม่เวอร์) ---
+
+    // 1. เพิ่งเริ่มเล่น (ยังไม่มีคะแนน)
+    const introMsgs = [
+        { t: "เริ่มต้นกันเลย!", s: "ยินดีต้อนรับครับ การเตรียมสอบสายอำนวยการต้องใช้เวลา เริ่มเก็บสะสมคำศัพท์ตั้งแต่วันนี้กันเลยดีกว่า" },
+        { t: "ก้าวแรกของวัน", s: "พร้อมลุยหรือยังครับ? ภาษาอังกฤษอาจจะดูเยอะ แต่ถ้าเราทยอยอ่านทุกวัน ยังไงก็ทำข้อสอบได้แน่นอน" },
+        { t: "เป้าหมายชัดเจน", s: "เก้าอี้สายอำนวยการรออยู่ครับ วันนี้เรามาเคาะสนิมคำศัพท์กันสักหน่อย ค่อยๆ เป็น ค่อยๆ ไปนะ" },
+        { t: "เตรียมความพร้อม", s: "การสอบสายอำนวยการแข่งขันสูงครับ การเริ่มต้นสะสมคำศัพท์ตั้งแต่วันนี้คือความได้เปรียบที่เราสร้างได้เอง" },
+        { t: "วันใหม่ เริ่มใหม่", s: "จัดตารางเวลาให้ดี แล้วมาแบ่งเวลาสัก 10-15 นาทีในแอปนี้ เพื่อทบทวนศัพท์กันครับ ทำน้อยแต่สม่ำเสมอดีที่สุด" },
+        { t: "โฟกัสที่เป้าหมาย", s: "ลองวางเรื่องอื่นไว้สักพัก แล้วมาตั้งสมาธิกับคำศัพท์ภาษาอังกฤษกันครับ สมองโล่งๆ จะช่วยให้จำได้ดีขึ้น" }
+    ];
+
+    // 2. กรณีมีคำผิดสะสมเยอะ (เน้นให้กลับมาทบทวน)
+    const mistakeMsgs = [
+        { t: "จุดที่ต้องย้ำ", s: `ตอนนี้น่าจะมีศัพท์ ${currentMistakes.length} คำที่ยังจำสับสนอยู่ ไม่เป็นไรครับ เรามาเน้นย้ำคำพวกนี้ให้แม่นขึ้นกันดีกว่า` },
+        { t: "ผิดเป็นครู", s: `ในสมุดมีคำผิดสะสมอยู่ ${currentMistakes.length} คำครับ ถือโอกาสนี้มาทบทวนสิ่งที่เราพลาด เพื่อไปเก็บแต้มในห้องสอบจริงนะ` },
+        { t: "เคลียร์จุดอ่อน", s: `คำศัพท์ ${currentMistakes.length} คำนี้อาจจะยากนิดนึง ลองจัดเวลามาทวนซ้ำดูนะครับ จะได้อุดรอยรั่วก่อนไปสอบ` },
+        { t: "เก็บตกความรู้", s: `มีศัพท์รอให้เราไปทบทวนอยู่ ${currentMistakes.length} คำครับ ค่อยๆ เคลียร์ไปทีละคำ ไม่ต้องรีบ แต่อย่าปล่อยทิ้งไว้นานนะ` },
+        { t: "อุดรอยรั่วก่อนสอบ", s: `มีศัพท์ ${currentMistakes.length} คำที่เรารอการทบทวนอยู่ครับ เคลียร์ตรงนี้ให้จบ จะได้มั่นใจขึ้นเวลาเจอข้อสอบจริง` },
+        { t: "การทบทวนคือหัวใจ", s: `อ่านของใหม่แล้ว อย่าลืมของเก่านะครับ ศัพท์ ${currentMistakes.length} คำนี้รอให้คุณกลับไปทำความเข้าใจอยู่นะ` },
+        { t: "เปลี่ยนจุดอ่อนเป็นจุดแข็ง", s: `ข้อสอบมักจะออกคำที่เราชอบสับสนนี่แหละครับ ลองให้เวลากับศัพท์ ${currentMistakes.length} คำนี้เป็นพิเศษดูนะครับ` },
+        { t: "อย่ามองข้ามคำผิด", s: `เก็บรายละเอียดให้ครบครับ ศัพท์ ${currentMistakes.length} คำในสมุดนี้ อาจจะเป็นข้อที่ชี้วัดคะแนนในวันสอบของคุณก็ได้` }
+    ];
+
+    // 3. กรณีทำได้ดีมาก (Streak สูง) (ชมตามจริง ไม่เว่อร์)
+    const streakMsgs = [
+        { t: "สมาธิดีมาก", s: `ทำถูกติดต่อกัน ${maxStreak} ข้อแล้ว! รักษาความนิ่งและสมาธิแบบนี้ไว้ใช้วันสอบจริงนะครับ ทำได้ดีมาก` },
+        { t: "รักษามาตรฐานไว้", s: `คอมโบ ${maxStreak} ข้อติด! แสดงว่าเริ่มจับทางคำศัพท์ได้แล้ว ขอให้คงมาตรฐานความแม่นยำแบบนี้ไว้เรื่อยๆ นะครับ` },
+        { t: "ฟอร์มกำลังมา", s: `ตอบถูกรวด ${maxStreak} ข้อ ถือเป็นสัญญาณที่ดีเลยครับ! สิ่งที่คุณตั้งใจสะสมมามันเริ่มออกผลแล้ว ลุยต่อครับ` },
+        { t: "ความแม่นยำสูง", s: `สถิติ ${maxStreak} ข้อติดกัน พิสูจน์ว่าคุณมีความรอบคอบสูงครับ จำความรู้สึกตอนมีสมาธิแบบนี้ไว้นะ` },
+        { t: "จังหวะกำลังดี", s: `ตอบถูก ${maxStreak} ข้อติดกัน ถือว่าจับหลักการจำได้ดีครับ พยายามรักษาความรู้สึกตอนมีสมาธิแบบนี้ไว้นะ` },
+        { t: "รอบคอบและแม่นยำ", s: `สถิติ ${maxStreak} ข้อรวด แสดงถึงความรอบคอบในการตัดช้อยส์ครับ นี่คือทักษะที่ต้องใช้จริงในวันสอบเลย` },
+        { t: "ความจำเริ่มเข้าที่", s: `ทำได้ ${maxStreak} ข้อแบบไม่พลาดเลย สมองเริ่มชินกับรูปประโยคและคำศัพท์แล้วครับ ลุยข้อต่อไปได้เลย` },
+        { t: "มาตรฐานดีเยี่ยม", s: `คอมโบ ${maxStreak} ข้อ ถือเป็นตัวเลขที่สะท้อนความตั้งใจของคุณได้ชัดเจนครับ รักษาระดับความฟิตของสมองนี้ไว้นะ` }
+    ];
+
+    // 4. กรณีเล่นปกติทั่วไป (เน้นความสม่ำเสมอ)
+    const normalMsgs = [
+        { t: "ความสม่ำเสมอคือคีย์สำคัญ", s: `ตอนนี้สะสมศัพท์ไปได้ ${totalWords} คำแล้วครับ การมีวินัยวันละนิด สำคัญกว่าการโหมอ่านแค่วันเดียวนะ สู้ๆ` },
+        { t: "เก็บเกี่ยวความรู้", s: `ยอดสะสม ${totalWords} คำแล้ว! ทุกคำที่คุณจำได้ คือโอกาส 1 คะแนนที่เพิ่มขึ้นในการสอบสายอำนวยการครับ` },
+        { t: "พักบ้าง ลุยบ้าง", s: `ผ่านตาไปแล้ว ${totalWords} คำ เหนื่อยก็พักกินน้ำ ยืดเส้นยืดสายบ้างนะครับ แล้วค่อยกลับมาทำโจทย์ต่อ` },
+        { t: "สะสมทีละก้าว", s: `เก็บศัพท์เข้าคลังไป ${totalWords} คำแล้ว ไม่ต้องไปเทียบกับใครครับ แข่งกับตัวเองก็พอ วันนี้รู้คำศัพท์มากกว่าเมื่อวานก็เยี่ยมแล้ว` },
+        { t: "ทุกคะแนนมีความหมาย", s: `ตอนนี้เรามีคลังศัพท์ ${totalWords} คำแล้วครับ จำไว้ว่าข้อสอบแค่ 1 ข้อก็เปลี่ยนอันดับได้ สะสมต่อไปครับ` },
+        { t: "เส้นทางสู่สายอำนวยการ", s: `ผ่านไปแล้ว ${totalWords} คำ อาจจะดูเหมือนหนทางยังอีกยาวไกล แต่คุณกำลังเดินมาถูกทางแล้วครับ` },
+        { t: "วินัยสร้างผลลัพธ์", s: `ยอดสะสม ${totalWords} คำ เกิดจากการลงมือทำทีละนิดครับ วันนี้ขอให้เป็นอีกวันที่ได้เรียนรู้สิ่งใหม่เพิ่มเติมนะ` },
+        { t: "พัฒนาการที่วัดผลได้", s: `ตัวเลข ${totalWords} คำนี้ คือหลักฐานของความพยายามครับ ทบทวนไปเรื่อยๆ ไม่ต้องกดดันตัวเองจนเกินไป` }
+    ];
+
+    // ⏱️ 5. หมวดใหม่: ให้กำลังใจเรื่องเวลาเรียน
+    const timeMsgs = [
+        { t: "บริหารเวลาได้ดีมาก", s: `วันนี้เราติวด้วยกันมา ${studyMins} นาทีแล้วครับ การใช้เวลาอย่างคุ้มค่าคือจุดเริ่มต้นของความสำเร็จนะ` },
+        { t: "พักสายตาบ้างนะครับ", s: `คุณใช้เวลาอ่านศัพท์ไป ${studyMins} นาทีแล้ว ถ้ารู้สึกตาล้า ลองมองออกไปไกลๆ พักสายตาสัก 1 นาทีก่อนลุยต่อนะครับ` },
+        { t: "ความพยายามไม่ทรยศใคร", s: `เวลา ${studyMins} นาทีที่คุณเสียสละมานั่งท่องศัพท์ จะเปลี่ยนเป็นคะแนนในห้องสอบอำนวยการแน่นอนครับ` },
+        { t: "สะสมเวลา สะสมความรู้", s: `เรียนมา ${studyMins} นาทีแล้วครับ การฝึกทำโจทย์บ่อยๆ จะช่วยลดความตื่นเต้นในวันสอบจริงได้มากเลยนะ` }
+    ];
+
+    // --- 🤖 ระบบสุ่มคำพูด (แก้ไขไม่ให้วนลูปซ้ำซาก) ---
+    let selectedMsg;
+
+    if (totalWords === 0) {
+        selectedMsg = introMsgs[Math.floor(Math.random() * introMsgs.length)];
+        actionBtn.style.display = "none";
+    } 
+    else if (currentMistakes.length > 3) {
+        // ถ้าคำผิดเยอะ ให้ความสำคัญกับการเตือนให้ทบทวนก่อน
+        selectedMsg = mistakeMsgs[Math.floor(Math.random() * mistakeMsgs.length)];
+        actionBtn.style.display = "block"; 
+    }
+    else {
+        // ถ้าคำผิดน้อย ให้ใช้คำพูดหมวดปกติ (normalMsgs) เป็นหลัก
+        let messagePool = [...normalMsgs];
+        
+        // ถ้าเคยมีสถิติคอมโบสูงๆ (maxStreak >= 10) ให้เอาคำชมไปผสมรวมด้วย
+        if (maxStreak >= 10) {
+            messagePool = messagePool.concat(streakMsgs);
+        }
+
+        // 🔥 ถ้าเรียนไปแล้วมากกว่า 5 นาที ให้เอากล่องคำพูดเรื่องเวลามาผสมด้วย
+        if (studyMins >= 5) {
+            messagePool = messagePool.concat(timeMsgs);
+        }
+        
+        // สุ่มหยิบ 1 ข้อความจากกล่องที่ผสมแล้ว
+        selectedMsg = messagePool[Math.floor(Math.random() * messagePool.length)];
+        actionBtn.style.display = "none";
+    }
+
+    // --- แสดงผลขึ้นหน้าจอ ---
+    titleEl.innerText = selectedMsg.t;
+    summaryEl.innerText = selectedMsg.s;
+}
+
+        // --- 🎮 Standard Mode ---
+        function startGame(limit) {
+        isReviewMode = false;
+            showScreen('screen-game');
+            let pool = selCat === 'all' ? [...vocabDatabase] : vocabDatabase.filter(i => i.category === selCat);
+            qs = pool.sort(() => Math.random() - 0.5);
+            if(limit > 0) qs = qs.slice(0, limit);
+            qIdx = 0; score = 0; corInRound = 0; fUsed = false; currentStreak = 0;
+            const cb = document.getElementById('combo-display'); if(cb) cb.innerHTML = "";
+            document.getElementById('btn-5050').disabled = false; document.getElementById('btn-5050').style.opacity = "1";
+            loadQ();
+        }
+        
+       function startReviewMode() {
+    if(mistakes.length === 0) return;
+    
+    playSnd('snd-click');
+    document.getElementById('m-modal').classList.add('hidden'); // ปิดสมุด
+    
+    isReviewMode = true; // เปิดโหมดล้างแค้น
+    
+    // ตั้งค่าเกมให้ใช้โจทย์จากสมุดจดคำผิด
+    qs = [...mistakes]; // ก๊อปปี้คำผิดมาเป็นโจทย์
+    qs = qs.sort(() => Math.random() - 0.5); // สลับข้อ
+    
+    // รีเซ็ตค่าต่างๆ
+    qIdx = 0; 
+    score = 0; 
+    corInRound = 0; 
+    
+    // เปลี่ยนหน้าจอไปหน้าเกมปกติ
+    showScreen('screen-game');
+    document.getElementById('btn-5050').disabled = false; 
+    document.getElementById('btn-5050').style.opacity = "1";
+    
+    loadQ(); // เริ่มโหลดคำถาม
+}
+
+        function loadQ() {
+            if (qIdx >= qs.length) return endGame();
+            isAns = false; const item = qs[qIdx];
+            setTxt('prog-txt', `${qIdx+1}/${qs.length}`);
+            setTxt('q-word', item.word);
+            setTxt('q-read', `/ ${item.read} /`);
+            document.getElementById('btn-next').classList.add('hidden');
+            let choices = [item.meaning, ...vocabDatabase.filter(w => w.meaning !== item.meaning).sort(() => Math.random() - 0.5).slice(0, 3).map(d => d.meaning)].sort(() => Math.random() - 0.5);
+            const area = document.getElementById('choices-area'); area.innerHTML = '';
+            choices.forEach(c => {
+                const b = document.createElement('button'); b.className = 'choice-btn'; b.innerText = c;
+                b.onclick = () => { playSnd('snd-click'); check(b, c, item.meaning); };
+                area.appendChild(b);
+            });
+            startTimer();
+        }
+
+        function startTimer() {
+            if(tInt) cancelAnimationFrame(tInt);
+            const duration = 10000; let startTime = null; const bar = document.getElementById('t-bar');
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const elapsed = timestamp - startTime; const remaining = Math.max(0, duration - elapsed); const pct = (remaining / duration) * 100;
+                bar.style.width = pct + "%";
+                if (remaining > 0 && !isAns) tInt = requestAnimationFrame(step);
+                else if (remaining <= 0 && !isAns) check(null, '', qs[qIdx].meaning);
+            }
+            tInt = requestAnimationFrame(step);
+        }
+        
+function check(btn, sel, cor) {
+    if (isAns) return; 
+    isAns = true; 
+    if(tInt) cancelAnimationFrame(tInt);
+    
+    // ล็อกปุ่มทั้งหมดไม่ให้กดซ้ำ
+    document.querySelectorAll('.choice-btn').forEach(b => b.disabled = true);
+    
+    // โหลด Style สีปุ่ม (ถ้ายังไม่มี)
+    const styles = document.createElement('style'); 
+    styles.innerHTML = `.correct { background: var(--success)!important; color: white!important; border-color: var(--success)!important; } .wrong { background: var(--danger)!important; color: white!important; border-color: var(--danger)!important; }`; 
+    document.head.appendChild(styles);
+    
+    if (sel === cor) {
+        // --- ✅ กรณีตอบถูก ---
+        if(btn) btn.classList.add('correct');
+        showAICoach('correct', currentStreak + 1);
+        
+        // 🔥 ตรวจสอบโหมด (Logic ใหม่)
+        if (isReviewMode) {
+            // ถ้าอยู่ในโหมดล้างแค้น: ลบคำผิดออกจากสมุด
+            mistakes = mistakes.filter(m => m.meaning !== cor);
+            localStorage.setItem('vMis', JSON.stringify(mistakes)); 
+            setTxt('score-txt', `Left: ${mistakes.length}`); // โชว์ว่าเหลือให้แก้กี่คำ
+        } else {
+            // ถ้าโหมดปกติ: คิดคะแนนและคอมโบตามเดิม
+            corInRound++; tCor++;
+            let mult = handleUniversalCombo(true, 'combo-normal'); 
+            score += mult; 
+            setTxt('score-txt', `Score: ${score}`);
+        }
+
+        playSnd('snd-correct'); 
+        setTimeout(nextQ, 1000); // ไปข้อต่อไปอัตโนมัติ
+
+    } else {
+        // --- ❌ กรณีตอบผิด ---
+        if(btn) btn.classList.add('wrong');
+        showAICoach('wrong');
+        
+        // ถ้าโหมดปกติ ให้รีเซ็ตคอมโบ (โหมดทบทวนไม่นับคอมโบ)
+        if (!isReviewMode) handleUniversalCombo(false, 'combo-normal');
+        
+        // เฉลยปุ่มที่ถูก
+        document.querySelectorAll('.choice-btn').forEach(b => { 
+            if(b.innerText === cor) b.classList.add('correct'); 
+        });
+        
+        playSnd('snd-wrong');
+        
+        // ถ้าโหมดปกติและยังไม่เคยจดคำนี้ -> จดลงสมุด
+        // (ส่วนโหมดทบทวนไม่ต้องทำอะไร เพราะมันอยู่ในสมุดอยู่แล้ว)
+        if(!isReviewMode && !mistakes.find(m => m.word === qs[qIdx].word)) { 
+            mistakes.push(qs[qIdx]); 
+            localStorage.setItem('vMis', JSON.stringify(mistakes)); 
+        }
+        
+        // แสดงปุ่ม "ข้อต่อไป" ให้กดเอง
+        document.getElementById('btn-next').classList.remove('hidden');
+    }
+    setTxt('score-txt', `Score: ${score}`);
+}
+        function use5050() { if (fUsed || isAns) return; playSnd('snd-click'); fUsed = true; document.getElementById('btn-5050').disabled = true; document.getElementById('btn-5050').style.opacity = "0.4"; const cor = qs[qIdx].meaning; const btns = Array.from(document.querySelectorAll('.choice-btn')); let rem = 0; btns.sort(() => Math.random() - 0.5).forEach(b => { if (b.innerText !== cor && rem < 2) { b.style.visibility = 'hidden'; rem++; } }); }
+        function nextQ() { qIdx++; loadQ(); }
+
+       function startTFGame() {
+    playSnd('snd-click'); 
+    showScreen('screen-tf');
+    tfLives = 3; 
+    tfScore = 0; 
+    updateTFLife(); 
+    setTxt('tf-score-txt', "Score: 0"); 
+    
+    initSwipeEvents(); // 🔥 เพิ่มบรรทัดนี้: เริ่มดักจับการปัด
+    nextTFQ();
+}
+        function updateTFLife() { let h = ""; for(let i=0;i<tfLives;i++) h += "❤️"; for(let i=tfLives;i<3;i++) h += "🖤"; setTxt('tf-life', h); }
+        function nextTFQ() {
+            if(tfLives <= 0) return endTFGame();
+            resetCard();
+            let pool = selCat === 'all' ? vocabDatabase : vocabDatabase.filter(i => i.category === selCat); if(pool.length === 0) pool = vocabDatabase;
+            const base = pool[Math.floor(Math.random() * pool.length)];
+            tfCorrect = Math.random() > 0.5;
+            let shownMeaning = base.meaning;
+            if (!tfCorrect) {
+                let wrong = pool[Math.floor(Math.random() * pool.length)];
+                while(wrong.meaning === base.meaning && pool.length > 1) wrong = pool[Math.floor(Math.random() * pool.length)];
+                shownMeaning = wrong.meaning;
+            }
+            setTxt('tf-word', base.word); setTxt('tf-mean', shownMeaning); startTFTimer();
+        }
+        function startTFTimer() {
+            if(tfInt) cancelAnimationFrame(tfInt); const duration = 4000; let startTime = null; const bar = document.getElementById('tf-bar');
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime; const remaining = Math.max(0, duration - elapsed); const pct = (remaining / duration) * 100; bar.style.width = pct + "%";
+                if (remaining > 0) tfInt = requestAnimationFrame(step); else timeoutTF();
+            }
+            tfInt = requestAnimationFrame(step);
+        }
+        function timeoutTF() { playSnd('snd-wrong'); tfLives--; updateTFLife(); document.getElementById('screen-tf').style.background = "#ffeaa7"; setTimeout(() => document.getElementById('screen-tf').style.background = "white", 200); nextTFQ(); }
+       function answerTF(ans) {
+    if(tfInt) cancelAnimationFrame(tfInt);
+
+    if (ans === tfCorrect) { 
+        playSnd('snd-correct');
+        
+        // 🔥 ส่วนที่เพิ่มใหม่: คิดคะแนนแบบ Combo
+        let mult = handleUniversalCombo(true, 'combo-tf');
+        let points = 1 * mult;
+        
+        tfScore += points; 
+        tXP += points; 
+        
+        setTxt('tf-score-txt', "Score: " + tfScore); 
+        nextTFQ(); 
+    } else { 
+        playSnd('snd-wrong'); 
+        
+        // 🔥 ส่วนที่เพิ่มใหม่: รีเซ็ต Combo
+        handleUniversalCombo(false, 'combo-tf');
+        
+        tfLives--; updateTFLife(); nextTFQ(); 
+    }
+    localStorage.setItem('tXP', tXP);
+}
+        function endTFGame() { playSnd('snd-win'); showScreen('screen-end'); setTxt('end-msg', "Game Over! ⚡"); setTxt('f-score', tfScore + " Points"); document.getElementById('stars').innerHTML = ""; setTxt('bonus-notif', ""); setTxt('streak-summary', ""); localStorage.setItem('tXP', tXP); }
+
+        // --- 🧩 Vowel Game Logic ---
+        function startVowelGame() {
+            playSnd('snd-click'); showScreen('screen-vowel');
+            voLives = 3; voScore = 0; updateVoLife(); setTxt('vo-score-txt', "Score: 0"); nextVoQ();
+        }
+        function updateVoLife() { let h = ""; for(let i=0;i<voLives;i++) h += "❤️"; for(let i=voLives;i<3;i++) h += "🖤"; setTxt('vo-life', h); }
+        function nextVoQ() {
+            if(voLives <= 0) return endVoGame();
+            let pool = selCat === 'all' ? vocabDatabase : vocabDatabase.filter(i => i.category === selCat); if(pool.length === 0) pool = vocabDatabase;
+            let validWords = pool.filter(w => /[aeiou]/i.test(w.word)); if(validWords.length === 0) validWords = pool;
+            const item = validWords[Math.floor(Math.random() * validWords.length)];
+            const matches = [...item.word.matchAll(/[aeiou]/gi)]; if(matches.length === 0) { nextVoQ(); return; }
+            const target = matches[Math.floor(Math.random() * matches.length)];
+            voCorrect = target[0].toLowerCase();
+            const displayWord = item.word.substring(0, target.index) + "_" + item.word.substring(target.index + 1);
+            setTxt('vo-word', displayWord); setTxt('vo-mean', item.meaning);
+            const vowels = ['a', 'e', 'i', 'o', 'u']; let choices = [voCorrect];
+            while(choices.length < 4) { let r = vowels[Math.floor(Math.random() * vowels.length)]; if(!choices.includes(r)) choices.push(r); }
+            choices.sort(() => Math.random() - 0.5);
+            const area = document.getElementById('vo-choices'); area.innerHTML = '';
+            choices.forEach(v => {
+                const b = document.createElement('button'); b.className = 'vowel-btn'; b.innerText = v;
+                b.onclick = () => { playSnd('snd-click'); checkVo(b, v); };
+                area.appendChild(b);
+            });
+            startVoTimer();
+        }
+        function startVoTimer() {
+            if(voInt) cancelAnimationFrame(voInt); const duration = 8000; let startTime = null; const bar = document.getElementById('vo-bar');
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp; const elapsed = timestamp - startTime; const remaining = Math.max(0, duration - elapsed); const pct = (remaining / duration) * 100; bar.style.width = pct + "%";
+                if (remaining > 0) voInt = requestAnimationFrame(step); else timeoutVo();
+            }
+            voInt = requestAnimationFrame(step);
+        }
+        function timeoutVo() { playSnd('snd-wrong'); voLives--; updateVoLife(); document.getElementById('screen-vowel').style.background = "#ffcccc"; setTimeout(() => document.getElementById('screen-vowel').style.background = "white", 200); nextVoQ(); }
+        function checkVo(btn, ans) {
+    if(voInt) cancelAnimationFrame(voInt); 
+    document.querySelectorAll('.vowel-btn').forEach(b => b.disabled = true);
+    
+    if(ans === voCorrect) { 
+        btn.classList.add('correct'); 
+        playSnd('snd-correct'); 
+        
+        // 🔥 ส่วนที่เพิ่มใหม่
+        let mult = handleUniversalCombo(true, 'combo-vo');
+        let points = 1 * mult;
+        
+        voScore += points; 
+        tXP += (points + 1); 
+        
+        setTxt('vo-score-txt', "Score: " + voScore); 
+        setTimeout(nextVoQ, 600); 
+    } else { 
+        btn.classList.add('wrong'); 
+        playSnd('snd-wrong'); 
+        
+        // 🔥 ส่วนที่เพิ่มใหม่
+        handleUniversalCombo(false, 'combo-vo');
+        
+        voLives--; updateVoLife(); 
+        document.querySelectorAll('.vowel-btn').forEach(b => { 
+            if(b.innerText === voCorrect) b.classList.add('correct'); 
+        }); 
+        setTimeout(nextVoQ, 1000); 
+    }
+    localStorage.setItem('tXP', tXP);
+}
+        function endVoGame() { playSnd('snd-win'); showScreen('screen-end'); setTxt('end-msg', "Game Over! 🧩"); setTxt('f-score', voScore + " Points"); document.getElementById('stars').innerHTML = ""; setTxt('bonus-notif', ""); setTxt('streak-summary', ""); localStorage.setItem('tXP', tXP); }
+
+        // --- 📝 Sentence Game Logic ---
+        let senLives = 3, senScore = 0, currentSenObj = null, userSentence = [];
+
+        function startSentenceGame() {
+            playSnd('snd-click'); showScreen('screen-sentence');
+            senLives = 3; senScore = 0; updateSenLife(); setTxt('sen-score-txt', "Score: 0"); nextSentenceQ();
+        }
+
+        function updateSenLife() { 
+            let h = ""; for(let i=0;i<senLives;i++) h += "❤️"; for(let i=senLives;i<3;i++) h += "🖤"; 
+            setTxt('sen-life', h); 
+        }
+
+        function nextSentenceQ() {
+            if(senLives <= 0) return endSentenceGame();
+            
+            document.getElementById('sen-feedback').classList.add('hidden');
+            document.getElementById('sen-next-btn').classList.add('hidden');
+            
+            let pool = sentenceDB;
+            if (selCat && selCat.startsWith('sen-')) {
+                const targetLevel = selCat.split('-')[1];
+                const filtered = sentenceDB.filter(s => s.level === targetLevel);
+                if (filtered.length > 0) pool = filtered;
+            }
+
+            currentSenObj = pool[Math.floor(Math.random() * pool.length)];
+            userSentence = [];
+            
+            setTxt('sen-mean', currentSenObj.th);
+            const ansArea = document.getElementById('sen-answer-area');
+            ansArea.innerHTML = '<span style="color:#bdc3c7; font-size:0.9rem;">(แตะคำด้านล่างเพื่อเรียง)</span>';
+            ansArea.className = 'sentence-box'; 
+            document.getElementById('sen-check-btn').classList.add('hidden');
+
+            let words = currentSenObj.en.split(' '); 
+            words.sort(() => Math.random() - 0.5);
+
+            const choiceArea = document.getElementById('sen-choices');
+            choiceArea.innerHTML = '';
+            words.forEach((w, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'word-chip'; btn.innerText = w; btn.id = `w-${idx}`;
+                btn.onclick = () => selectWord(w, btn);
+                choiceArea.appendChild(btn);
+            });
+        }
+
+        function selectWord(word, btnElement) {
+            if (!document.getElementById('sen-next-btn').classList.contains('hidden')) return;
+
+            playSnd('snd-click');
+            const ansArea = document.getElementById('sen-answer-area');
+            if(userSentence.length === 0) ansArea.innerHTML = '';
+            
+            btnElement.classList.add('in-answer');
+            btnElement.onclick = () => removeWord(word, btnElement);
+            ansArea.appendChild(btnElement);
+            userSentence.push(word);
+
+            const remaining = document.getElementById('sen-choices').children.length;
+            if (remaining === 0) document.getElementById('sen-check-btn').classList.remove('hidden');
+        }
+
+        function removeWord(word, btnElement) {
+            if (!document.getElementById('sen-next-btn').classList.contains('hidden')) return;
+
+            playSnd('snd-click');
+            const choiceArea = document.getElementById('sen-choices');
+            btnElement.classList.remove('in-answer');
+            btnElement.onclick = () => selectWord(word, btnElement);
+            choiceArea.appendChild(btnElement);
+            
+            const index = userSentence.lastIndexOf(word);
+            if (index > -1) userSentence.splice(index, 1);
+            
+            document.getElementById('sen-check-btn').classList.add('hidden');
+            if(userSentence.length === 0) document.getElementById('sen-answer-area').innerHTML = '<span style="color:#bdc3c7; font-size:0.9rem;">(แตะคำด้านล่างเพื่อเรียง)</span>';
+        }
+
+        function checkSentence() {
+    const builtSen = userSentence.join(' ').trim();
+    const correctSen = currentSenObj.en.trim();
+    const box = document.getElementById('sen-answer-area');
+    const feedback = document.getElementById('sen-feedback');
+
+    if (builtSen === correctSen) {
+        playSnd('snd-correct'); 
+        box.classList.add('correct'); 
+        
+        // 🔥 ส่วนที่เพิ่มใหม่
+        let mult = handleUniversalCombo(true, 'combo-sen');
+        let points = 10 * mult;
+        
+        senScore += points; 
+        tXP += (5 * mult);
+        
+        setTxt('sen-score-txt', "Score: " + senScore);
+        setTimeout(nextSentenceQ, 1000);
+    } else {
+        playSnd('snd-wrong'); 
+        box.classList.add('wrong'); 
+        
+        // 🔥 ส่วนที่เพิ่มใหม่
+        handleUniversalCombo(false, 'combo-sen');
+        
+        senLives--; 
+        updateSenLife();
+        feedback.innerHTML = `❌ <b>เฉลย:</b> <span style="color:#d63031; font-weight:bold;">${correctSen}</span>`;
+        feedback.classList.remove('hidden');
+        document.getElementById('sen-check-btn').classList.add('hidden');
+        document.getElementById('sen-next-btn').classList.remove('hidden');
+    }
+    localStorage.setItem('tXP', tXP);
+}
+        function endSentenceGame() {
+            playSnd('snd-win'); showScreen('screen-end'); setTxt('end-msg', "Game Over! 📝");
+            setTxt('f-score', senScore + " Points"); document.getElementById('stars').innerHTML = "";
+            setTxt('bonus-notif', ""); setTxt('streak-summary', "");
+        }
+
+        // --- Common ---
+        function endGame() {
+            let bonus = (corInRound === qs.length && qs.length > 0) ? 50 : 0;
+            if(bonus > 0) tPerf++; tXP += (score + bonus);
+            let tg = parseInt(localStorage.getItem('totalGames'))||0; tg++; localStorage.setItem('totalGames', tg);
+            
+            localStorage.setItem('tXP', tXP); localStorage.setItem('tCor', tCor); localStorage.setItem('tPerf', tPerf);
+            playSnd('snd-win'); showScreen('screen-end');
+            setTxt('end-msg', "จบการติว! 🎉"); setTxt('f-score', score + " Points");
+            setTxt('bonus-notif', bonus > 0 ? "✨ PERFECT BONUS +50 XP ✨" : "");
+            setTxt('streak-summary', `Max Combo: ${maxStreak}`);
+            const sDiv = document.getElementById('stars'); sDiv.innerHTML = '';
+            let pct = (corInRound/qs.length)*100; for(let i=1; i<=3; i++) sDiv.innerHTML += `<span style="color:${pct >= i*33 ? '#f1c40f' : '#dfe6e9'}">★</span>`;
+            showAIPostGameSummary(pct);
+        }
+
+        function openMistakes() {
+    playSnd('snd-click'); 
+    
+    // 🔥 ส่วนที่เพิ่มมา: เช็คปุ่มล้างแค้น
+    const btnRev = document.getElementById('btn-revenge');
+    if(btnRev) {
+        if(mistakes.length > 0) {
+            btnRev.style.display = 'block'; // โชว์ปุ่มถ้ามีคำผิด
+            btnRev.innerText = `💀 ล้างแค้น (${mistakes.length} คำ)`;
+        } else {
+            btnRev.style.display = 'none';  // ซ่อนปุ่มถ้าไม่มีคำผิด
+        }
+    }
+
+    const area = document.getElementById('m-list'); 
+    area.innerHTML = mistakes.length ? "" : "<p style='color:#b2bec3; text-align:center;'>เยี่ยมมาก! ไม่มีคำผิดเลย</p>";
+    
+    mistakes.forEach((m, i) => { 
+        const item = document.createElement('div');
+        item.style = "display:flex; justify-content:space-between; align-items:center; padding:15px; border-bottom:1px solid #eee; font-size: 1rem;";
+        item.innerHTML = `<span><b>${m.word}</b><br><small style='color:#636e72'>${m.meaning}</small></span>`;
+        const delBtn = document.createElement('button');
+        delBtn.innerHTML = "🗑️"; delBtn.style = "color:#ff7675; border:none; background:none; font-size: 1.2rem; cursor: pointer;";
+        delBtn.onclick = () => { playSnd('snd-click'); remM(i); };
+        item.appendChild(delBtn); area.appendChild(item);
+    });
+    
+    document.getElementById('m-modal').classList.remove('hidden');
+}
+        function remM(i) { mistakes.splice(i, 1); localStorage.setItem('vMis', JSON.stringify(mistakes)); openMistakes(); updateUI(); }
+        /* --- 📱 TINDER LOGIC (Touch & Mouse) --- */
+const card = document.getElementById('tf-card');
+const txtYes = document.getElementById('txt-yes');
+const txtNo = document.getElementById('txt-no');
+
+let isDragging = false;
+let startX = 0;
+let currentX = 0;
+let tfGameActive = false; 
+
+// ฟังก์ชันเริ่มจับ event
+function initSwipeEvents() {
+    // Touch
+    if(card) {
+        card.addEventListener('touchstart', dragStart);
+        card.addEventListener('touchmove', dragMove);
+        card.addEventListener('touchend', dragEnd);
+        // Mouse
+        card.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', dragMove);
+        document.addEventListener('mouseup', dragEnd);
+    }
+}
+
+function dragStart(e) {
+    if(!tfGameActive) return;
+    isDragging = true;
+    startX = (e.type === 'touchstart') ? e.touches[0].clientX : e.clientX;
+    card.style.transition = 'none'; 
+}
+
+function dragMove(e) {
+    if (!isDragging) return;
+    e.preventDefault(); 
+
+    let x = (e.type === 'touchmove') ? e.touches[0].clientX : e.clientX;
+    currentX = x - startX;
+    let rotate = currentX * 0.1; 
+
+    card.style.transform = `translateX(${currentX}px) rotate(${rotate}deg)`;
+
+    if (currentX > 0) {
+        txtYes.style.opacity = Math.min(currentX / 100, 1);
+        txtNo.style.opacity = 0;
+    } else {
+        txtNo.style.opacity = Math.min(Math.abs(currentX) / 100, 1);
+        txtYes.style.opacity = 0;
+    }
+}
+
+function dragEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    const threshold = 100; 
+
+    if (currentX > threshold) {
+        finishSwipe('right');
+    } else if (currentX < -threshold) {
+        finishSwipe('left');
+    } else {
+        card.style.transition = 'transform 0.3s ease';
+        card.style.transform = 'translateX(0) rotate(0)';
+        txtYes.style.opacity = 0;
+        txtNo.style.opacity = 0;
+    }
+}
+
+function manualSwipe(dir) {
+    if(!tfGameActive) return;
+    finishSwipe(dir);
+}
+
+function finishSwipe(dir) {
+    tfGameActive = false; 
+    if (dir === 'right') {
+        card.classList.add('fly-right');
+        setTimeout(() => answerTF(true), 300); 
+    } else {
+        card.classList.add('fly-left');
+        setTimeout(() => answerTF(false), 300); 
+    }
+}
+
+function resetCard() {
+    card.classList.remove('fly-left', 'fly-right');
+    card.style.transition = 'none';
+    card.style.transform = 'scale(0.8)'; 
+    card.style.opacity = '0';
+    if(txtYes) txtYes.style.opacity = 0;
+    if(txtNo) txtNo.style.opacity = 0;
+    
+    setTimeout(() => {
+        card.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        card.style.transform = 'scale(1) translateX(0) rotate(0)';
+        card.style.opacity = '1';
+        tfGameActive = true; 
+    }, 50);
+}
+// --- 🔥 UNIVERSAL COMBO SYSTEM ---
+function handleUniversalCombo(isCorrect, uiId) {
+    const ui = document.getElementById(uiId);
+    
+    if (isCorrect) {
+        currentStreak++;
+        // อัปเดตสถิติสูงสุด
+        if(currentStreak > maxStreak) { 
+            maxStreak = currentStreak; 
+            localStorage.setItem('maxStreak', maxStreak); 
+        }
+
+        // คำนวณตัวคูณ
+        let mult = 1;
+        let comboClass = "combo-badge";
+        let icon = "🔥";
+        
+        if (currentStreak >= 10) { 
+            mult = 3; // คูณ 3 ถ้าถูกติดกัน 10 ข้อ
+            comboClass += " combo-god"; 
+            icon = "⚡"; 
+        } else if (currentStreak >= 5) { 
+            mult = 2; // คูณ 2 ถ้าถูกติดกัน 5 ข้อ
+            comboClass += " combo-high"; 
+            icon = "🚀"; 
+        }
+
+        // แสดงผล
+        if (currentStreak > 1 && ui) {
+             ui.innerHTML = `<div class="${comboClass}">${icon} COMBO x${currentStreak} (x${mult} Exp)</div>`;
+        } else if (ui) {
+             ui.innerHTML = "";
+        }
+        
+        return mult; // ส่งค่าตัวคูณกลับไปคิดคะแนน
+    } else {
+        currentStreak = 0; // รีเซ็ตถ้าตอบผิด
+        if(ui) ui.innerHTML = "";
+        return 1;
+    }
+}
+// --- 🃏 Flashcard Game Logic (แก้บัค 100%) ---
+        let fcQueue = [];
+        let fcCurrent = null;
+        let fcTotal = 0;
+        let fcCount = 0;
+
+        function startFlashcardMode() {
+            playSnd('snd-click'); 
+            showScreen('screen-flashcard');
+            
+            let pool = selCat === 'all' ? [...vocabDatabase] : vocabDatabase.filter(i => i.category === selCat);
+            if(pool.length === 0) pool = [...vocabDatabase];
+            
+            fcQueue = pool.sort(() => Math.random() - 0.5).slice(0, 20); 
+            fcTotal = fcQueue.length;
+            fcCount = 0;
+            
+            nextFlashcard();
+        }
+
+        function nextFlashcard() {
+            const card = document.getElementById('fc-card');
+            const controls = document.getElementById('fc-controls');
+            
+            // 🛑 ปิดแอนิเมชันชั่วคราว เพื่อดึงการ์ดกลับมาตั้งตรงกลางแบบพริบตาเดียว (แก้บัคการ์ดค้าง)
+            card.style.transition = 'none'; 
+            card.classList.remove('is-flipped', 'swipe-left', 'swipe-right');
+            
+            // ปิดปุ่มไว้ก่อนจนกว่าจะพลิกการ์ด
+            controls.style.opacity = '0.3';
+            controls.style.pointerEvents = 'none';
+            
+            if (fcQueue.length === 0) {
+                playSnd('snd-win');
+                tXP += 30; 
+                localStorage.setItem('tXP', tXP);
+                showScreen('screen-end');
+                setTxt('end-msg', "จำศัพท์ได้หมดกองแล้ว! 🃏");
+                setTxt('f-score', "สุดยอดมาก!");
+                document.getElementById('stars').innerHTML = "🌟🌟🌟";
+                setTxt('bonus-notif', "+30 XP Bonus (โหมดแฟลชการ์ด)");
+                setTxt('streak-summary', `คุณเคลียร์แฟลชการ์ดไป ${fcCount} คำ`);
+                return;
+            }
+            
+            fcCurrent = fcQueue[0];
+            fcCount++;
+            
+            // อัปเดต UI ความคืบหน้า
+            setTxt('fc-progress-txt', `${fcCount} / ${fcTotal}`);
+            document.getElementById('fc-progress-bar').style.width = `${(fcCount / fcTotal) * 100}%`;
+            
+            // เปลี่ยนคำศัพท์
+            setTxt('fc-word-en', fcCurrent.word);
+            setTxt('fc-word-th', fcCurrent.meaning);
+            setTxt('fc-word-read', `/ ${fcCurrent.read} /`);
+
+            // 🟢 เปิดแอนิเมชันกลับมาใช้งานตามปกติ
+            setTimeout(() => {
+                card.style.transition = 'transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), opacity 0.4s';
+            }, 50);
+        }
+
+        function flipCard() {
+            const card = document.getElementById('fc-card');
+            const controls = document.getElementById('fc-controls');
+            
+            playSnd('snd-click');
+            // ✅ ใช้ toggle เพื่อให้คลิกซ้ำแล้วพลิกไปพลิกมาได้อิสระ
+            card.classList.toggle('is-flipped'); 
+            
+            // ถ้าการ์ดหันหลังอยู่ (เห็นคำแปล) ให้ปุ่มกดได้ แต่ถ้าหันหน้าอยู่ให้ล็อคปุ่ม
+            if (card.classList.contains('is-flipped')) {
+                controls.style.opacity = '1';
+                controls.style.pointerEvents = 'auto';
+            } else {
+                controls.style.opacity = '0.3';
+                controls.style.pointerEvents = 'none';
+            }
+        }
+
+function swipeFlashcard(remembered) {
+            const card = document.getElementById('fc-card');
+            const controls = document.getElementById('fc-controls');
+            
+            controls.style.opacity = '0.3';
+            controls.style.pointerEvents = 'none';
+            
+            if (remembered) {
+                playSnd('snd-correct'); // เสียงถูกยังเก็บไว้
+                card.classList.add('swipe-right'); 
+                fcQueue.shift(); 
+                tXP++; localStorage.setItem('tXP', tXP);
+            } else {
+                // 🤫 เอาเสียง playSnd('snd-wrong'); ออกไปแล้วครับ
+                card.classList.add('swipe-left'); 
+                let word = fcQueue.shift();
+                fcQueue.push(word); 
+                fcTotal++; 
+                
+                if(!mistakes.find(m => m.word === word.word)) {
+                    mistakes.push(word);
+                    localStorage.setItem('vMis', JSON.stringify(mistakes));
+                }
+            }
+            
+            setTimeout(() => {
+                nextFlashcard();
+            }, 400); 
+        }
+// --- 🧠 ฟังก์ชัน AI วิเคราะห์ผลหลังจบเกม ---
+function showAIPostGameSummary(percentCorrect) {
+    const msgEl = document.getElementById('ai-postgame-msg');
+    let messages = [];
+    
+    // วิเคราะห์ตามเปอร์เซ็นต์ที่ตอบถูก
+    if (percentCorrect === 100) {
+        messages = [
+            "เพอร์เฟกต์! ฟอร์มแบบนี้ทำข้อสอบอำนวยการได้เต็มชัวร์ๆ โคตรเจ๋งครับ!",
+            "ไร้ที่ติ! สมองคุณจดจำคำศัพท์ได้ยอดเยี่ยมมาก พักดื่มน้ำชื่นใจๆ ซักแก้วนะ"
+        ];
+    } else if (percentCorrect >= 70) {
+        messages = [
+            "เกณฑ์ผ่านฉลุยครับ! พลาดแค่นิดเดียวเอง ถือว่าความจำคุณดีมากแล้วนะ ลุยต่อ!",
+            "ทำได้ดีมากครับ! ข้อที่ผิดเดี๋ยวแพทริคจดลงสมุดไว้ให้ ไม่ต้องซีเรียสเลย"
+        ];
+    } else if (percentCorrect >= 40) {
+        messages = [
+            "มาเกินครึ่งทางแล้ว! ข้อสอบอาจจะหลอกเยอะไปหน่อย แต่เราได้เรียนรู้คำใหม่ๆ เพียบเลยนะ",
+            "ไม่แย่เลยครับสำหรับการฝึก! จำไว้นะครับ ผิดในแอปนี้ดีกว่าไปผิดในห้องสอบ ลุยกันใหม่!"
+        ];
+    } else {
+        messages = [
+            "รอบนี้ข้อสอบคงจะเขี้ยวไปจริงๆ ไม่เป็นไรนะ หายใจลึกๆ แล้วลองเล่นโหมด 10 ข้อ ดูก่อนไหม?",
+            "คะแนนไม่ได้บอกทุกอย่างครับ! วันนี้จำไม่ได้ พรุ่งนี้ค่อยมาเล่นใหม่ แพทริคเป็นกำลังใจให้เสมอ"
+        ];
+    }
+    
+    // สุ่มข้อความมาแสดง
+    const finalMsg = messages[Math.floor(Math.random() * messages.length)];
+    msgEl.innerText = finalMsg;
+}
+function openAIStats() {
+        if(typeof playSnd === 'function') playSnd('snd-click');
+        
+        const studyMins = parseInt(localStorage.getItem('studyMins')) || 0;
+        const tCor = parseInt(localStorage.getItem('tCor')) || 0;
+        
+        // 1. คำนวณความคืบหน้าคำศัพท์ (อิงเป้าหมาย 4,000 คำ)
+        let readyScore = Math.floor((tCor / 4000) * 100);
+        if(readyScore > 100) readyScore = 100;
+        if(readyScore < 0) readyScore = 0;
+        
+        const readyBar = document.getElementById('ai-ready-bar');
+        const readyPct = document.getElementById('ai-ready-pct');
+        const readyTxt = document.getElementById('ai-ready-text');
+        
+        if(readyPct) readyPct.innerText = readyScore + "%";
+        setTimeout(() => { if(readyBar) readyBar.style.width = readyScore + "%"; }, 100);
+        
+        let color = "var(--danger)";
+        let txt = "เพิ่งเริ่มต้นการเดินทาง! คำศัพท์อีกเพียบรออยู่ ลุยเลย! 🚀";
+        if(readyScore >= 80) { color = "var(--success)"; txt = "คลังศัพท์ระดับเทพ! ข้อสอบจะออกอะไรก็ไม่หวั่นแล้ว 👑"; }
+        else if(readyScore >= 50) { color = "#0984e3"; txt = "มาไกลแล้วนะเนี่ย! อ่านประโยคยาวๆ ได้สบายขึ้นแล้ว 🌟"; }
+        else if(readyScore >= 20) { color = "var(--accent)"; txt = "เก็บเล็กผสมน้อยไปเรื่อยๆ เริ่มมีคลังศัพท์ในหัวแล้ว 📈"; }
+        
+        if(readyPct) readyPct.style.color = color;
+        if(readyBar) readyBar.style.background = color;
+        if(readyTxt) readyTxt.innerText = txt;
+        
+        // 2. วาดกราฟแท่ง
+        const chartArea = document.getElementById('ai-chart-area');
+        const labelsArea = document.getElementById('ai-chart-labels');
+        let history = JSON.parse(localStorage.getItem('chartHistory')) || [];
+        
+        // ล้างข้อมูลเก่าทิ้งทันที ถ้าเจอวันที่ที่มีตัวสแลช "/" 
+        if (history.length > 0 && history[0].date && history[0].date.includes('/')) {
+            history = [];
+            localStorage.setItem('chartHistory', JSON.stringify([]));
+        }
+        
+        const dateObj = new Date();
+        const todayStr = dateObj.getDate() + " " + ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][dateObj.getMonth()];
+        
+        let displayHistory = [...history];
+        let todayRecordIndex = displayHistory.findIndex(h => h.date === todayStr);
+        if(todayRecordIndex > -1) { 
+            displayHistory[todayRecordIndex].val = studyMins; 
+        } else { 
+            displayHistory.push({ date: todayStr, val: studyMins }); 
+        }
+        
+        // ทำให้กราฟมีอย่างน้อย 5 วันเสมอ
+        while(displayHistory.length < 5) { displayHistory.unshift({ date: "-", val: 0 }); }
+        if(displayHistory.length > 5) displayHistory = displayHistory.slice(-5);
+        
+        let maxVal = Math.max(...displayHistory.map(d => d.val), 15);
+        
+        if(chartArea) chartArea.innerHTML = ""; 
+        if(labelsArea) labelsArea.innerHTML = "";
+        displayHistory.forEach((item, i) => {
+            let heightPct = (item.val / maxVal) * 100;
+            let isToday = (i === displayHistory.length - 1);
+            let barColor = isToday ? "var(--primary)" : "#a29bfe";
+            
+            if(chartArea) chartArea.innerHTML += `
+                <div style="display: flex; flex-direction: column; align-items: center; width: 18%;">
+                    <span style="font-size: 0.75rem; color: #636e72; font-weight:bold; margin-bottom: 5px;">${item.val}m</span>
+                    <div style="width: 100%; background: #f1f2f6; border-radius: 8px; height: 75px; position: relative; overflow: hidden; display: flex; align-items: flex-end;">
+                        <div style="width: 100%; background: ${barColor}; height: ${heightPct}%; border-radius: 8px; transition: height 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);"></div>
+                    </div>
+                </div>
+            `;
+            if(labelsArea) labelsArea.innerHTML += `<span style="width: 18%; text-align:center; font-size: 0.75rem; color: ${isToday ? 'var(--primary-dark)' : '#b2bec3'}; white-space: nowrap; overflow: hidden;">${item.date}</span>`;
+        });
+        
+        // 3. เรดาร์สแกนจุดอ่อน (คำนวณหมวดหมู่ที่ตอบผิดบ่อยที่สุด)
+        const radarArea = document.getElementById('ai-weakness-radar');
+        const mistakes = JSON.parse(localStorage.getItem('vMis')) || [];
+        
+        if (radarArea) {
+            if (mistakes.length === 0) {
+                radarArea.innerHTML = "<div style='text-align:center; color: #2ecc71; font-weight:bold; padding: 10px 0;'>เก่งมาก! ตอนนี้คุณไม่มีจุดอ่อนเลย 🎉</div>";
+            } else {
+                let catCounts = {};
+                mistakes.forEach(m => {
+                    let c = m.category || 'อื่นๆ';
+                    catCounts[c] = (catCounts[c] || 0) + 1;
+                });
+                
+                let sortedCats = Object.keys(catCounts).map(k => {
+                    return { cat: k, count: catCounts[k] };
+                }).sort((a, b) => b.count - a.count).slice(0, 4); 
+                
+                const catNames = {
+                    'verbs3': '⚡ กริยา 3 ช่อง', 'sen-easy': '🌱 ประโยค: ง่าย', 'sen-medium': '🌿 ประโยค: ปานกลาง', 'sen-hard': '🌳 ประโยค: ยาก',
+                    'body': '👀 ร่างกาย', 'home': '🏠 ของใช้บ้าน', 'clothing': '👕 เสื้อผ้า', 'feelings': '😊 ความรู้สึก', 'food': '🍔 อาหาร',
+                    'family': '👨‍👩‍👧‍👦 ครอบครัว', 'school': '🏫 โรงเรียน', 'places': '🏙️ สถานที่', 'action': '🏃‍♂️ คำกริยา', 'jobs': '👮 อาชีพ',
+                    'description': '📏 ลักษณะ', 'animal': '🐶 สัตว์', 'vehicle': '🚗 ยานพาหนะ', 'color': '🎨 สี/ทรง', 'time': '📅 วัน/เวลา',
+                    'sports': '⚽ กีฬา', 'hobby': '🧸 งานอดิเรก', 'fruits': '🍏 ผลไม้/ผัก', 'nature': '⛈️ ธรรมชาติ', 'technology': '💻 เทคโนโลยี',
+                    'grammar': '🗣️ ไวยากรณ์', 'personality': '🎭 นิสัย', 'shopping': '🛍️ ซื้อของ', 'education': '🎓 การศึกษา', 'health': '🏥 สุขภาพ',
+                    'travel': '✈️ ท่องเที่ยว', 'law': '⚖️ กฎหมาย', 'space': '🌌 อวกาศ', 'environment': '♻️ สิ่งแวดล้อม', 'tools': '🛠️ เครื่องมือ',
+                    'fantasy_creature': '🐉 สัตว์ในตำนาน', 'materials': '⛓️ วัสดุ', 'phrasal_verb': '🔥 กริยาวลี', 'slang': '👾 แสลง',
+                    'military': '🪖 การทหาร', 'idioms': '💬 สำนวน', 'basic': '👤 พื้นฐาน'
+                };
+
+                let html = "";
+                let maxMistakes = sortedCats[0].count; 
+                
+                sortedCats.forEach(item => {
+                    let displayName = catNames[item.cat] || item.cat;
+                    let barPct = (item.count / maxMistakes) * 100; 
+                    
+                    html += `
+                    <div style="margin-bottom: 15px;">
+                        <div style="display:flex; justify-content:space-between; margin-bottom: 6px; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">
+                            <span>${displayName}</span>
+                            <span style="color: var(--danger); background: #fff0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem;">พลาด ${item.count} คำ</span>
+                        </div>
+                        <div style="background: #f1f2f6; height: 12px; border-radius: 6px; overflow: hidden; position: relative;">
+                            <div style="background: linear-gradient(90deg, #ff7675, #d63031); width: ${barPct}%; height: 100%; border-radius: 6px;"></div>
+                        </div>
+                    </div>
+                    `;
+                });
+                
+                html += `
+                <button onclick="document.getElementById('ai-stats-modal').classList.add('hidden'); openMistakes();" style="width: 100%; margin-top: 10px; padding: 10px; background: #ffeaa7; color: #d35400; border: none; border-radius: 12px; font-weight: bold; cursor: pointer;">
+                    📖 เปิดสมุดจดเพื่อทบทวน
+                </button>`;
+                
+                radarArea.innerHTML = html;
+            }
+        }
+        
+        const modal = document.getElementById('ai-stats-modal');
+        if(modal) modal.classList.remove('hidden');
+    }
+
+    function closeAIStats() {
+        if(typeof playSnd === 'function') playSnd('snd-click');
+        const modal = document.getElementById('ai-stats-modal');
+        if(modal) modal.classList.add('hidden');
+    }
+
+    // --- ⏱️ ระบบจับเวลา และบันทึกกราฟวันต่อวัน ---
+    function checkDailyReset() {
+        const dateObj = new Date();
+        const todayStr = dateObj.getDate() + " " + ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'][dateObj.getMonth()];
+        
+        const lastDate = localStorage.getItem('lastStudyDate');
+        
+        // ถ้าระบบจำวันที่เป็นแบบเก่า (มี /) ให้เซ็ตใหม่เป็นแบบปัจจุบันทันที
+        if (lastDate && lastDate.includes('/')) {
+            localStorage.setItem('lastStudyDate', todayStr);
+            return;
+        }
+        
+        if (lastDate && lastDate !== todayStr) {
+            let history = JSON.parse(localStorage.getItem('chartHistory')) || [];
+            let lastMins = parseInt(localStorage.getItem('studyMins')) || 0;
+            
+            if(!history.find(h => h.date === lastDate)) {
+                history.push({ date: lastDate, val: lastMins });
+            }
+            if(history.length > 5) history.shift(); 
+            localStorage.setItem('chartHistory', JSON.stringify(history));
+            
+            localStorage.setItem('studyMins', 0);
+        }
+        localStorage.setItem('lastStudyDate', todayStr);
+    }
+    
+    checkDailyReset(); 
+    
+    if(window.studyTimerInt) clearInterval(window.studyTimerInt);
+    window.studyTimerInt = setInterval(() => {
+        checkDailyReset();
+        let currentMins = parseInt(localStorage.getItem('studyMins')) || 0;
+        localStorage.setItem('studyMins', currentMins + 1);
+    }, 60000);
+    // --- 🏆 ระบบ Leaderboard แข่งกับ Bot อัจฉริยะ (อัปเดต 10 อันดับ) ---
+        function initBots() {
+            let bots = JSON.parse(localStorage.getItem('rankBots'));
+            let lastUpdate = parseInt(localStorage.getItem('botLastUpdate')) || Date.now();
+            let currentXP = parseInt(localStorage.getItem('tXP')) || 0;
+
+            // ตรวจจับว่าถ้าไม่มีบอท หรือบอทเป็นเวอร์ชันเก่า (มีไม่ถึง 9 ตัว) ให้สร้างแก๊งใหม่ทันที
+            if (!bots || bots.length !== 9) {
+                bots = [
+                    { name: "ว่าที่ ร.ต.ต. พศิน 👮‍♂️", score: currentXP + 2500, rate: 35 }, // อันดับ 1 ตลอดกาล ขยันเวอร์
+                    { name: "สอบติดปีนี้สาธุ 🙏", score: currentXP + 1200, rate: 28 }, // สายมูเตลู แต้มพุ่งปรี้ด
+                    { name: "ครูพี่พลอย ติวเตอร์ 📚", score: currentXP + 850, rate: 22 }, // ติวเตอร์มาเอง
+                    { name: "Kritt_99 👾", score: currentXP + 450, rate: 18 }, // สายเกมเมอร์ แอบมาติว
+                    { name: "อ่านไม่ทันแล้ววว 😭", score: currentXP + 150, rate: 15 }, // บ่นแต่แต้มเยอะ
+                    { name: "นักสู้มือใหม่ 🔥", score: currentXP + 50, rate: 12 }, // คู่แข่งที่สูสีกับคุณ
+                    { name: "Mook_Mink 🌸", score: Math.max(0, currentXP - 120), rate: 10 }, // คนธรรมดาเพิ่งเริ่มเล่น
+                    { name: "SleepyHead 💤", score: Math.max(0, currentXP - 350), rate: 8 }, // คนง่วงนอนตลอดเวลา
+                    { name: "แค่สอบผ่านก็พอ ✌️", score: Math.max(0, currentXP - 600), rate: 5 } // สายชิล ขอแค่ผ่านมินิมัม
+                ];
+                localStorage.setItem('rankBots', JSON.stringify(bots));
+                localStorage.setItem('botLastUpdate', Date.now());
+            } else {
+                // 🛑 ระบบโหด: คำนวณเวลาออฟไลน์แล้วบวกแต้มให้บอท
+                let now = Date.now();
+                let diffMins = Math.floor((now - lastUpdate) / 120000); // อัปเดตทุกๆ 2 นาที
+                
+                if (diffMins > 0) {
+                    let cycles = Math.min(diffMins, 300); // ลิมิตบวกย้อนหลังไม่เกิน 10 ชม.
+                    bots.forEach(b => {
+                        let bonusXP = Math.floor(Math.random() * b.rate * cycles) + (2 * cycles);
+                        b.score += bonusXP;
+                    });
+                    localStorage.setItem('rankBots', JSON.stringify(bots));
+                    localStorage.setItem('botLastUpdate', now);
+                }
+            }
+        }
+
+        // อัปเดตคะแนนให้บอททุกๆ 2 นาที ตอนเปิดแอปอยู่
+        if(window.botTimerInt) clearInterval(window.botTimerInt);
+        window.botTimerInt = setInterval(() => {
+            let bots = JSON.parse(localStorage.getItem('rankBots'));
+            if(bots && bots.length === 9) {
+                bots.forEach(b => {
+                    b.score += Math.floor(Math.random() * b.rate) + 3;
+                });
+                localStorage.setItem('rankBots', JSON.stringify(bots));
+                localStorage.setItem('botLastUpdate', Date.now());
+                
+                const lbModal = document.getElementById('leaderboard-modal');
+                if(lbModal && !lbModal.classList.contains('hidden')) {
+                    renderLeaderboard();
+                }
+            }
+        }, 120000);
+
+        function openLeaderboard() {
+            if(typeof playSnd === 'function') playSnd('snd-click');
+            initBots(); 
+            renderLeaderboard();
+            document.getElementById('leaderboard-modal').classList.remove('hidden');
+        }
+
+        function closeLeaderboard() {
+            if(typeof playSnd === 'function') playSnd('snd-click');
+            document.getElementById('leaderboard-modal').classList.add('hidden');
+        }
+
+        function renderLeaderboard() {
+            let bots = JSON.parse(localStorage.getItem('rankBots')) || [];
+            let currentXP = parseInt(localStorage.getItem('tXP')) || 0;
+            
+            // รวมคุณ (ผู้เล่นจริง) เข้าไปเป็นคนที่ 10
+            let allPlayers = [...bots, { name: "คุณ (You) 🚀", score: currentXP, isUser: true }];
+            
+            // เรียงลำดับจาก XP มากไปน้อย
+            allPlayers.sort((a, b) => b.score - a.score);
+            
+            let listHTML = "";
+            allPlayers.forEach((p, index) => {
+                let rankStr = index + 1;
+                let medal = "";
+                if (index === 0) { medal = "🥇"; }
+                else if (index === 1) { medal = "🥈"; }
+                else if (index === 2) { medal = "🥉"; }
+                else { medal = `<span style="color:#b2bec3; font-size:1.3rem; font-weight:900;">${rankStr}</span>`; }
+                
+                let userClass = p.isUser ? "rank-item is-user" : "rank-item";
+                
+                listHTML += `
+                <div class="${userClass}">
+                    <div class="rank-medal">${medal}</div>
+                    <div class="rank-name">${p.name}</div>
+                    <div class="rank-score" style="${p.isUser ? '' : 'color: var(--primary);'}">${p.score.toLocaleString()} XP</div>
+                </div>
+                `;
+            });
+            
+            document.getElementById('lb-list').innerHTML = listHTML;
+        }
+
+        // เริ่มแร้งกิ้ง
+        initBots();
+    </script>
+  <div id="ai-coach-toast" class="hidden" style="position: fixed; top: 20px; left: 50%; transform: translate(-50%, -20px); width: 90%; max-width: 400px; background: white; border-radius: 16px; padding: 15px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-left: 5px solid var(--primary); display: flex; align-items: center; gap: 15px; z-index: 9999; opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); pointer-events: none;">
+    <img src="image_0.png" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; flex-shrink: 0;">
+    <div>
+        <span style="font-size: 0.75rem; font-weight: 800; color: var(--primary); letter-spacing: 0.5px;">AI MENTOR</span>
+        <p id="ai-coach-msg" style="margin: 3px 0 0; font-size: 0.95rem; color: var(--text-main); font-weight: 600; line-height: 1.3;"></p>
+    </div>
+</div>
+</body>
+</html>
