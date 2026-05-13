@@ -938,6 +938,9 @@
                         playSound('powerup');
                         if(d.type === 'heal') player.hp = Math.min(player.maxHp, player.hp + 3);
                         if(d.type === 'shield') player.hasShield = true;
+                        // เพิ่มเงื่อนไขถ้าเก็บหัวใจ ให้เพิ่มชีวิตผู้เล่น
+                        if(d.type === 'life') player.lives++; 
+                        
                         addScore(15); spawnDamageText(player.x + player.width/2, player.y - 10, d.type.toUpperCase() + "!");
                     }
                     drops.splice(i, 1); i--; updateUI();
@@ -982,12 +985,13 @@
                         if (isEnraged && !boss.enraged) { boss.enraged = true; playSound('warning'); spawnDamageText(boss.x + boss.width/2, boss.y - 20, "ENRAGED!", "red", 30); }
                         let enrageMult = isEnraged ? 1.5 : 1;
 
-                        if (boss.type === 1) { // 👹 บอส Laser Core (Wave 10)
+                                                if (boss.type === 1) { // 👹 บอส Laser Core (Wave 10)
                             if (boss.isLasering) {
                                 boss.x += boss.vx * 0.3 * eSpeedMult * enrageMult; 
                                 if (boss.x <= 10 || boss.x + boss.width >= gw - 10) boss.vx *= -1;
                                 boss.skillTimer++;
                                 
+                                // --- เลเซอร์ชุดที่ 1 ---
                                 if (boss.skillTimer < 90) { 
                                     ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; ctx.fillRect(boss.x + boss.width/2 - 40, boss.y + boss.height, 80, gh);
                                 } else if (boss.skillTimer < 150) { 
@@ -999,7 +1003,28 @@
                                     if (!isPaused && checkCollision(player, laserHitBox)) { 
                                         if (frameCount % 15 === 0) takeDamage(2); 
                                     } 
-                                } else { boss.isLasering = false; boss.skillTimer = 0; boss.vx = (Math.random()>0.5?3:-3); }
+                                } 
+                                // --- พักชาร์จ 1 วินาที ให้ผู้เล่นขยับหลบ ---
+                                else if (boss.skillTimer < 180) { 
+                                    // ไม่วาดเลเซอร์ รอจังหวะยิงครั้งที่ 2
+                                } 
+                                // --- เลเซอร์ชุดที่ 2 ---
+                                else if (boss.skillTimer < 240) { 
+                                    ctx.fillStyle = 'rgba(255, 0, 0, 0.3)'; ctx.fillRect(boss.x + boss.width/2 - 40, boss.y + boss.height, 80, gh);
+                                } else if (boss.skillTimer < 300) { 
+                                    ctx.fillStyle = '#ff0000'; ctx.shadowBlur = 20; ctx.shadowColor = '#ff0000';
+                                    ctx.fillRect(boss.x + boss.width/2 - 40, boss.y + boss.height, 80, gh); ctx.shadowBlur = 0;
+                                    triggerShake(3); if(boss.skillTimer === 241) playSound('laser'); 
+                                    
+                                    let laserHitBox = { x: boss.x + boss.width/2 - 40, y: boss.y + boss.height, width: 80, height: gh };
+                                    if (!isPaused && checkCollision(player, laserHitBox)) { 
+                                        if (frameCount % 15 === 0) takeDamage(2); 
+                                    } 
+                                } 
+                                // --- จบการยิง กลับไปโหมดปกติ ---
+                                else { 
+                                    boss.isLasering = false; boss.skillTimer = 0; boss.vx = (Math.random()>0.5?3:-3); 
+                                }
                             } else {
                                 boss.x += boss.vx * eSpeedMult * enrageMult; if (boss.x <= 10 || boss.x + boss.width >= gw - 10) boss.vx *= -1;
                                 
@@ -1015,6 +1040,7 @@
                                 let laserCooldown = 250; 
                                 if (boss.skillTimer > laserCooldown) { boss.isLasering = true; boss.skillTimer = 0; }
                             }
+                        
                         } else if (boss.type === 2) { // บอส Hive Queen
                             boss.x += boss.vx * eSpeedMult * enrageMult; if (boss.x <= 10 || boss.x + boss.width >= gw - 10) boss.vx *= -1;
                             boss.fireTimer += enrageMult;
@@ -1242,7 +1268,7 @@
                         
                         if (boss.hp <= 0) {
                             triggerShake(30); createExplosion(boss.x + boss.width/2, boss.y + boss.height/2, boss.color, 8); playSound('nuke'); addScore(1000 * (waveData.current/5)); player.exp += 200; 
-                            drops.push({x: boss.x+20, y: boss.y, type: 'heal', icon: '🛠️'}); drops.push({x: boss.x+50, y: boss.y, type: 'bomb', icon: '💣'}); drops.push({x: boss.x+80, y: boss.y, type: 'heal', icon: '🛠️'});
+                            drops.push({x: boss.x+80, y: boss.y, type: 'heal', icon: '🛠️'}); drops.push({x: boss.x+50, y: boss.y, type: 'bomb', icon: '💣'}); drops.push({x: boss.x+110, y: boss.y, type: 'life', icon: '❤️'});
                             boss = null; ui.bossUI.style.display = 'none'; 
                             
                             document.querySelector('.ui-panel').classList.remove('boss-active');
@@ -1303,7 +1329,7 @@
             }
         }
 
-        function startWave(waveNum) {
+                        function startWave(waveNum) {
             waveData.enemiesSpawned = 0; waveData.enemiesKilled = 0;
             if (waveNum % 5 === 0) {
                 waveData.enemiesTotal = 0; ui.bossWarning.style.display = 'block'; playSound('warning');
@@ -1313,7 +1339,10 @@
 
                 setTimeout(() => { ui.bossWarning.style.display = 'none'; }, 200); setTimeout(() => { ui.bossWarning.style.display = 'block'; }, 400); setTimeout(() => { ui.bossWarning.style.display = 'none'; }, 600); setTimeout(() => { ui.bossWarning.style.display = 'block'; }, 800); setTimeout(() => { ui.bossWarning.style.display = 'none'; }, 2000);
                 setTimeout(() => {
-                    let bHp = 600 + (waveNum * 120); 
+                    let bHp = 300 + (waveNum * 50); 
+                    // ปรับเลือดบอส Wave 10 ให้ทึกขึ้นเป็น 850
+                    if (waveNum === 10) bHp = 850; 
+                    
                     boss = { x: gw/2 - 60, y: -150, width: 120, height: 100, color: bossType===1?'#ff0000':(bossType===2?'#ff00ff':'#ff0055'), hp: bHp, maxHp: bHp, vx: 2.5, state: 'enter', fireTimer: 0, skillTimer: 0, type: bossType, isLasering: false, enraged: false, laserHitThisTurn: false }; 
                     ui.bossUI.style.display = 'block'; waveData.enemiesSpawned = 1; 
                     
@@ -1325,6 +1354,7 @@
             } else { waveData.enemiesTotal = 10 + (waveNum * 5); showWaveAnnouncer(`WAVE ${waveNum}`); }
             updateUI();
         }
+
 
         function showWaveAnnouncer(text) { ui.waveAnnounce.innerText = text; ui.waveAnnounce.style.opacity = 1; setTimeout(() => { ui.waveAnnounce.style.opacity = 0; }, 2000); }
 
@@ -1455,3 +1485,4 @@
     </script>
 </body>
 </html>
+
